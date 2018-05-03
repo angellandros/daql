@@ -1,10 +1,11 @@
-\documentclass[DIN, pagenumber=false, fontsize=11pt, parskip=half]{scrartcl}
+\documentclass[DIN, pagenumber=false, fontsize=12pt, parskip=half]{scrartcl}
 
 \usepackage{tikz}
 \usepackage{tikz-qtree}
 
 \usepackage[utf8]{inputenc}
 \usepackage{textcomp}
+\usepackage{longtable}
 
 \usepackage[bottom=1in,top=0.5in,left=0.7in,right=0.7in]{geometry}
 \geometry{a4paper}
@@ -41,12 +42,228 @@
          level distance=1.5cm}
 
 \noindent\textbf{Data Analysis and Query Languages} \hfill \textbf{Albert-Ludwigs-Universität Freiburg}\\
-Sommersemester 2018 \hfill Mohammad-Ali A'R\^ABI \& Youssef El-Hassani\\
+Sommersemester 2018 \hfill Mohammad-Ali A'R\^ABI \& Youssef El Hassani\\
 
-\mytitle{\ \ \"Ubungsblatt 01 \hfill \today}
+\mytitle{1. Exercise Sheet: Recommender Systems \hfill \today}
 
 
 %===================================
-\mysection{Aufgabe 1.}
+\mysection{Exercise 1: Collaborative-filtering Recommender Systems}
 
+a) Given the following table:
+
+\begin{table}[htb]
+\centering
+
+\label{my-label}
+\begin{tabular}{lcccccc}
+\hline
+       & Item 1 & Item 2 & Item 3 & Item 4 & Item 5 & Item 6 \\ \hline
+Alice  & 5      & 3      & 4      & ?      & 1      & ?      \\
+User 1 & 3      & 1      & 2      & 3      & 1      & 3      \\
+User 2 & 4      & 3      & 4      & 3      & 1      & 5      \\
+User 3 & 3      & 3      & 1      & 5      & 1      & 4      \\
+User 4 & 1      & 5      & 5      & 2      & 1      & 1     \\ \hline
+\end{tabular}
+\end{table}
+
+ The cosine similarities between Alice and all the other users are the following: \\
+\begin{center}
+$	sim ( Alice, User1) = 0.9762 $ \\
+$	sim ( Alice, User2) = 0.9939 $ \\
+$	sim ( Alice, User3) = 0.9080 $ \\
+$	sim ( Alice, User4) = 0.7962 $ \\
+\end{center}
+The predictions computed from the prediction function are the following: \\
+
+$ pred ( Alice, Item 4) = \frac{13}{4} + \frac{1}{\left | 0.9762 + 0.9939 \right |} \cdot \left ( 0.9939 \cdot \left ( 3-\frac{20}{6} \right ) + 0.9762 \cdot \left (3-\frac{13}{6}\right) \right ) $  \\
+$ pred ( Alice, Item 4) = 3.4947$ \\
+
+$ pred ( Alice, Item 6) = \frac{13}{4} + \frac{1}{\left | 0.9762 + 0.9939 \right |} \cdot \left ( 0.9939 \cdot \left ( 5-\frac{20}{6} \right ) + 0.9762 \cdot \left (3-\frac{13}{6}\right) \right ) $  \\
+$ pred ( Alice, Item 6) = 4.5037$ \\
+
+%===================================
+\mysection{Exercise 2: Similarity metrics}
+
+a) $ Proof :$
+
+We have the following cosine similarity formula:
+\begin{center}
+$ sim ( X, Y ) = \frac{\left | X \right | \cdot \left | Y \right |}{\sqrt{X^{2}} \cdot \sqrt{Y^{2}}}$ \\
+\end{center}
+We now replace X by bX and Y by dY:
+\begin{center}
+$ sim ( X, Y ) =\frac{\left | bX \right | \cdot \left | dY \right |}{\sqrt{(bX)^{2}} \cdot \sqrt{(dY)^{2}}}$ \\
+\end{center}
+By equivalence: 
+\begin{center}
+$ sim ( X, Y ) =\frac{\left | b \right |\cdot \left | X \right | \cdot \left | d \right |\cdot\left | Y \right |}{\sqrt{(b)^{2}} \cdot \sqrt{(X)^{2}} \cdot \sqrt{(d)^{2}} \cdot \sqrt{(Y)^{2}}}$ \\
+$ sim ( X, Y ) =\frac{\left | b \right |\cdot \left | X \right | \cdot \left | d \right |\cdot\left | Y \right |}{\left | b \right | \cdot \sqrt{(X)^{2}} \cdot \left | d \right | \cdot \sqrt{(Y)^{2}}}$\\
+\end{center}
+By eliminating b and d we get:
+\begin{center}
+$ sim ( X, Y ) = \frac{\left | X \right | \cdot \left | Y \right |}{\sqrt{X^{2}} \cdot \sqrt{Y^{2}}}$ \\
+\end{center}
+Thus, the cosine similarity is invariant to the scale of variables.
+
+b) $ Proof :$
+We have the following Pearson similarity formula:
+\begin{center}
+$ sim ( X, Y ) = \frac{\sum \left ( X -\bar{X}\right ) \cdot \left ( Y -\bar{Y}\right )}{\sqrt{\sum \left ( X-\bar{X} \right )^{2} \sum \left ( Y-\bar{Y}\right )^{2} }}$ \\
+We then replace \\
+$ a+bX for X$ \\
+$ c+dY for Y$\\
+\end{center}
+\begin{center}
+Remark that the previous mean values will become:\\
+$a+b\bar{X} for \bar{X}$ \\
+$ c+d\bar{X} for \bar{X}$ \\
+\end{center}
+By equivalence we get: \\
+
+\begin{center}
+$sim ( X, Y ) = \frac{\sum \left ( a + bX - a - b\bar{X}\right ) \cdot \left ( c + dY - c -d\bar{Y}\right )}{\sqrt{\sum \left ( a + bX- a - b\bar{X} \right )^{2} \sum \left ( c + dY-c-d\bar{Y}\right )^{2} }}$\\
+$sim( X, Y ) = \frac{\sum \left ( bX - b\bar{X}\right ) \cdot \left ( dY-d\bar{Y}\right )}{\sqrt{\sum \left (bX- b\bar{X} \right )^{2} \sum \left ( dY-d\bar{Y}\right )^{2} }}$\\
+$sim( X, Y ) = \frac{\sum \left ( bd \right )\cdot \left ( X - \bar{X}\right ) \cdot \left ( Y-\bar{Y}\right )}{\sqrt{\sum \left ( b \right )^{2}\cdot\left (X- \bar{X} \right )^{2} \sum \left( d \right )^{2}\cdot  \left ( Y-\bar{Y}\right )^{2} }}$\\
+\end{center}
+
+b and d are constant thefore: \\
+\begin{center}
+$sim ( X, Y ) =\frac{\left ( bd \right )\cdot \sum \left ( X - \bar{X}\right ) \cdot \left ( Y-\bar{Y}\right )}{\sqrt{\left ( bd \right )^{2}\cdot\sum \left (X- \bar{X} \right )^{2} \sum  \left ( Y-\bar{Y}\right )^{2} }}$\\
+$sim( X, Y ) = \frac{\left ( bd \right )\cdot\sum \left ( X - \bar{X}\right ) \cdot \left ( Y-\bar{Y}\right )}{\left ( bd \right )\cdot\sqrt{\sum \left (X- \bar{X} \right )^{2} \sum  \left ( Y-\bar{Y}\right )^{2} }}$\\
+$ sim ( X, Y ) = \frac{\sum \left ( X -\bar{X}\right ) \cdot \left ( Y -\bar{Y}\right )}{\sqrt{\sum \left ( X-\bar{X} \right )^{2} \sum \left ( Y-\bar{Y}\right )^{2} }}$ \\
+\end{center}
+Thus, the pearson similarity is invariant to separate changes of location and scale of the variables.
+
+
+%===================================
+\mysection{Exercise 3: Recommendations based on association rules}
+
+The mean adjusted rating matrix R` from R:
+
+\begin{table}[htb]
+\centering
+\label{my-label}
+\begin{tabular}{lccccccc}
+\hline
+       & Item 1 & Item 2 & Item 3 & Item 4 & Item 5 & Item 6 & mean \\ \hline
+Alice  & 1.75   & -0.25  & 0.75   & ?      & -2.25  & ?      & 3.25 \\
+User 1 & 0.84   & -1.16  & -0.16  & 0.84   & -1.16  & 0.84   & 2.16 \\
+User 2 & 0.66   & -0.33  & 0.66   & -0.33  & -2.33  & 1.66   & 3.33 \\
+User 3 & 0.17   & 0.17   & -1.83  & 2.17   & -1.83  & 1.17   & 2.83 \\
+User 4 & -1.5   & 2.5    & 2.5    & -0.5   & -1.5   & -1.5   & 2.5 \\ \hline
+\end{tabular}
+\end{table}
+
+The transformed mean-adjusted utility matrix:\\
+\begin{table}[htb]
+\centering
+\caption{My caption}
+\label{my-label}
+\begin{tabular}{lcccccc}
+\hline
+       & Item 1 & Item 2 & Item 3 & Item 4 & Item 5 & Item 6 \\ \hline
+Alice  & 1      & 0      & 1      & ?      & 0      & ?      \\
+User 1 & 1      & 0      & 0      & 1      & 0      & 1      \\
+User 2 & 1      & 0      & 1      & 0      & 0      & 1      \\
+User 3 & 1      & 1      & 0      & 1      & 0      & 1      \\
+User 4 & 0      & 1      & 1      & 0      & 0      & 0     \\ \hline
+\end{tabular}
+\end{table}
+
+Support Calculations:\\
+\begin{center}
+$	support ( Item 1 ) = \frac {3}{4}$\\ 
+$	support ( Item 2 ) = \frac {1}{2}$\\
+$	support ( Item 3 ) = \frac {1}{2} $\\
+$	support ( Item 4 ) = \frac {1}{2}$\\
+$	support ( Item 5 ) = 0$\\
+$	support ( Item 6 ) = \frac {3}{4}$\\
+$	support ( Item 1 , Item 4) = \frac {1}{2}$\\
+$	support ( Item 1 , Item 6) =\frac {3}{4} $\\
+$	support ( Item 1 , Item 4, team 6) =\frac {1}{2} $\\
+\end{center}
+Confidence Calculations:\\
+\begin{center}
+$	confidence (Item 1\Rightarrow Item 4) = \frac {support ( Item 1 , Item 4)}{support ( Item 1)} = \frac {\frac{1}{2}}{\frac {3}{4}}=\frac {2}{3}$\\
+$	confidence (Item 1\Rightarrow Item 6) = \frac {support ( Item 1 , Item 6)}{support ( Item 1)} = \frac {\frac{3}{4}}{\frac {3}{4}}=1$\\
+$	confidence (Item 1, Item 4 \Rightarrow Item 6) = \frac {support ( Item 1 , Item 4, Item 6)}{support ( Item 1 , Item 4)} = \frac {\frac{1}{2}}{\frac {1}{2}}=\frac {2}{3}$\\
+$	confidence (Item 1, Item 6\Rightarrow Item 4) = \frac {support ( Item 1 , Item 6, Item 4)}{support ( Item 1 , Item 6)} = \frac {\frac{1}{2}}{\frac {3}{4}}=\frac {2}{3}$\\
+\end{center}
+
+Frequent Item sets: ( all sets greater or equal to the support treshhold) \\
+\begin{center}
+$	\left [ Item 1 \right ], \left [ Item 2 \right ], \left [ Item 3 \right ], \left [ Item 4 \right ], \left [ Item 6 \right ], \left [ Item 1, Item 4 \right ], \left [ Item 1, Item 6 \right ], \left [ Item 1, Item 4, Item 6 \right ]$\\
+\end{center}
+Inference Rules: ( all inference rules greater or equal to the confidence treshhold) \\
+\begin{center}
+$	\left [ Item 1\Rightarrow Item 4 \right ],\left [ Item 1\Rightarrow Item 6 \right ],\left [ Item 1,Item 4\Rightarrow Item 6 \right ],\left [ Item 1,Item 6\Rightarrow Item 4 \right ]$\\
+\end{center}
+This two association rules will most likely generate a recommendation because of their high confidence value: \\
+\begin{center}
+$	\left [ Item 1\Rightarrow Item 6 \right ],\left [ Item 1,Item 6\Rightarrow Item 4 \right ]$\\
+\end{center}
+The system will use the first inference rule in order to recommend Item 6 because its confidence has the highest confidence value given the initial state. Then the system will most likely recommend item 4 as a second step because it has the highest confidence given the state where the system already recommended item 6 for Alice.\\
+
+
+%===================================
+\mysection{Exercise 4: Recommender systems, Probabilistic Approach}
+
+a) Calculation of priors for Item 2 and Item 4\\
+
+\begin{table}[htb]
+\centering
+\label{my-label}
+\begin{tabular}{lll}
+\hline
+  & Item 2             & Item 4            \\ \hline
+1 & P(Item2 = 1) = 1/4 & P(Item4= 1) = 0   \\
+2 & P(Item2 = 2) = 0   & P(Item4= 2) = 1/4 \\
+3 & P(Item2 = 3) = 1/2 & P(Item4= 3) = 1/2 \\
+4 & P(Item2 = 4) = 0   & P(Item4= 4) = 0   \\
+5 & P(Item2 = 5) = 1/4 & P(Item4= 5) = 1/4 \\ \hline
+\end{tabular}
+\end{table}
+b) Calculation of class-conditional probabilities for Alice`s ratings X={ Item1 = 5, Item 3= 4}:\\
+
+\begin{table}[htb]
+\centering
+\label{my-label}
+\resizebox{\textwidth}{!}{
+\begin{tabular}{cccccc}
+\hline
+  & 1                             & 2                             & 3                               & 4                             & 5                             \\ \hline
+Item1 & P(Item1 = 5 | Item2 = 1) = 0  & P(Item1 = 5 | Item2 = 2) = 0  & P(Item1 = 5 | Item2 = 3) = 1/2  & P(Item1 = 5 | Item2 = 4) = 0  & P(Item1 = 5 | Item2 = 5) = 0  \\
+Item3 & P(Item3 = 4 |  Item2 = 1) = 0 & P(Item3 = 4 |  Item2 = 2) = 0 & P(Item3 = 4 |  Item2 = 3) = 1/2 & P(Item3 = 4 |  Item2 = 4) = 0 & P(Item3 = 4 |  Item2 = 5) = 0 \\ \hline
+\end{tabular}}
+\end{table}
+
+\begin{table}[htbp]
+\centering
+\label{my-label}
+\resizebox{\textwidth}{!}{
+\begin{tabular}{cccccc}
+\hline
+  & 1                             & 2                             & 3                               & 4                             & 5                              \\ \hline
+Item1 & P(Item1 = 5 | Item4 = 1) = 0  & P(Item1 = 5 | Item4 = 2) = 0  & P(Item1 = 5 | Item4 = 3) = 0    & P(Item1 = 5 | Item4 = 4) = 0  & P(Item1 = 5 | Item4 = 5) = 1/2 \\
+Item3 & P(Item3 = 4 |  Item4 = 1) = 0 & P(Item3 = 4 |  Item4 = 2) = 0 & P(Item3 = 4 |  Item4 = 3) = 1/2 & P(Item3 = 4 |  Item4 = 4) = 0 & P(Item3 = 4 |  Item4 = 5) = 0  \\ \hline
+\end{tabular}}
+\end{table}
+\newpage
+b) Posterior probabilities of Alice`s ratings:\\
+
+\begin{table}[htb]
+\centering
+\label{my-label}
+\resizebox{\textwidth}{!}{
+\begin{tabular}{cccccc}
+\hline
+ & 1 & 2 & 3 & 4 & 5 \\ \hline
+Item2 & P(Item2 = 1 | X) = 0 & P(Item2 = 2 | X) = 0 & P(Item2 = 3 | X) = 1/8 & P(Item2 = 4 | X) = 0 & P(Item2 = 5 | X) = 0 \\
+Item4 & P(Item4 = 1 | X) = 0 & P(Item4 = 2 | X) = 0 & P(Item4 = 3 | X) = 0 & P(Item4 = 4 | X) = 0 & P(Item4 = 5 | X) = 0 \\ \hline
+\end{tabular}}
+\end{table}
+
+d) Posterior probabilities of Alice`s ratings:\\
+The only value we could derive is 1/8 thefore we would recommend Item 2 and assign it a rating of 3.
 \end{document}
