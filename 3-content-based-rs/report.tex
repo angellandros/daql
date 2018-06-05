@@ -7,9 +7,9 @@
 \usepackage{textcomp}
 \usepackage{longtable}
 
-\usepackage{enumitem}
+\usepackage{amsmath}
 
-\usepackage[german]{babel}
+\usepackage{enumitem}
 
 \usepackage[bottom=1in,top=0.5in,left=0.7in,right=0.7in]{geometry}
 \geometry{a4paper}
@@ -18,6 +18,12 @@
 
 
 \setlength{\parindent}{0em}
+
+% new notation
+
+\newcommand{\prob}[1]{\mathbb{P}\left[ #1 \right]}
+\newcommand{\probm}[2]{\mathbb{P}\left[ #1 ~\middle|~ #2 \right]}
+\newcommand{\D}{\mathcal{D}}
 
 % set section in CM
 \setkomafont{section}{\normalfont\bfseries\Large}
@@ -61,20 +67,53 @@ Given the vector space model $\mathcal{V} = \{\mathrm{costumes}, \mathrm{hallowe
 
 \begin{table}[htb]
 \centering
-\label{my-label}
-\begin{tabular}{|l|ccccc|}
+\label{tab:bob-and-5}
+\begin{tabular}{|l|ccccc|c|}
 \hline
-   & costumes & halloween & recommender & system & matrix-factorization \\
+   & costumes & halloween & recommender & system & matrix-factorization & preference \\
    \hline \hline
-   $D_1$ & 1 & 1 & 0 & 0 & 0 \\
-   $D_2$ & 0 & 1 & 0 & 0 & 0 \\
-   $D_3$ & 1 & 0 & 0 & 0 & 0 \\
-   $D_4$ & 0 & 0 & 1 & 1 & 0 \\
-   $D_5$ & 0 & 0 & 1 & 1 & 1 \\
+   $D_1$ & 1 & 1 & 0 & 0 & 0 & 1 \\
+   $D_2$ & 0 & 1 & 0 & 0 & 0 & 1 \\
+   $D_3$ & 1 & 0 & 0 & 0 & 0 & n/a \\
+   $D_4$ & 0 & 0 & 1 & 1 & 0 & 0 \\
+   $D_5$ & 0 & 0 & 1 & 1 & 1 & n/a \\
    \hline
 \end{tabular}
-\caption{TF representation of the snippets}
+\caption{TF representation of the snippets, together with Bob's preference}
 \end{table}
+
+\item % b)
+Denote Bob's preference by the random variable $\ell$. We are interested in calculating
+\[
+\probm{\ell = 1}{\D_i} = \frac{\prod_j \probm{\D_i^j}{\ell = 1}\prob{\ell = 1}}{\prob{\D_i}},
+\]
+with $\D_i^j$ denoting $D^j = D_i^j$ and $\D_i$ denoting $\bigwedge_j \D_i^j$.
+
+For the case of $i=3$,
+\begin{eqnarray*}
+\prod_j \probm{\D_3^j}{\ell = 1} &=& \probm{D^1 = 1}{\ell = 1} \times \probm{D^2 = 0}{\ell = 1} \times \probm{D^3 = 0}{\ell = 1} \times \\
+&& \probm{D^4 = 0}{\ell = 1} \times \probm{D^5 = 0}{\ell = 1} \\
+&=& 0.5 \times 0 \times 1 \times 1 \times 1 \\
+&=& 0.
+\end{eqnarray*}
+
+Hence $\probm{\ell = 1}{\D_3} = 0$. For the case of $i = 5$ also we have $\probm{D^2 = 0}{\ell=1} = 0$, hence $\probm{\ell = 1}{\D_5} = 0$. So, there won't be any preference between $D_3$ and $D_5$.
+
+\item % c)
+
+We have $D^+ = \{D_1, D_2\}$ and $D^- = \{D_4\}$. So
+\begin{eqnarray*}
+u_p &=& \beta \left( \frac{1}{|D^+|} \sum_{d \in D^+} d \right) - \gamma \left( \frac{1}{|D^-|} \sum_{d \in D^-} d \right) \\
+&=& 0.4 \left( \begin{bmatrix} 1 \\ 1 \\ 0 \\ 0 \\ 0 \end{bmatrix} + \begin{bmatrix} 0 \\ 1 \\ 0 \\ 0 \\ 0 \end{bmatrix} \right) - 0.2 \begin{bmatrix} 0 \\ 0 \\ 1 \\ 1 \\ 0 \end{bmatrix} \\
+&=& \begin{bmatrix} 0.4 & 0.8 & -0.2 & -0.2 & 0 \end{bmatrix}^T.
+\end{eqnarray*}
+
+\item
+Comparing Bob's profile $u_p$ with $D_3$ and $D_5$ with cosine similarity
+\[
+\mathrm{sim}(A, B) = \frac{\left\langle A, B \right\rangle}{\|A\| \cdot \|B\|},
+\]
+we have $\mathrm{sim}(u_p, D_3) \approx 0.426$ and $\mathrm{sim}(u_p, D_5) \approx -0.246$. Hence $D_3$ is recommended to Bob.
 
 \end{enumerate}
 \end{document}
