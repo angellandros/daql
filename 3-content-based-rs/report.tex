@@ -9,13 +9,22 @@
 
 \usepackage{amsmath}
 
+% for alphabet items
 \usepackage{enumitem}
 
-\usepackage[bottom=1in,top=0.5in,left=0.7in,right=0.7in]{geometry}
+\usepackage[bottom=1in,top=1in,left=0.7in,right=0.7in]{geometry}
 \geometry{a4paper}
 
 \usepackage{hyperref}
 
+% fancy header
+\usepackage{fancyhdr}
+
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{Mohammad-Ali A'R\^ABI \& Youssef EL-HASSANI}
+\lhead{DAQL SS2018 :: 3. Exercise Sheet}
+\rfoot{Page \thepage}
 
 \setlength{\parindent}{0em}
 
@@ -44,6 +53,7 @@
 
 %===================================
 \begin{document}
+\thispagestyle{empty}
 
 \tikzset{every tree node/.style={minimum width=2em,draw,circle},
          blank/.style={draw=none},
@@ -114,6 +124,168 @@ Comparing Bob's profile $u_p$ with $D_3$ and $D_5$ with cosine similarity
 \mathrm{sim}(A, B) = \frac{\left\langle A, B \right\rangle}{\|A\| \cdot \|B\|},
 \]
 we have $\mathrm{sim}(u_p, D_3) \approx 0.426$ and $\mathrm{sim}(u_p, D_5) \approx -0.246$. Hence $D_3$ is recommended to Bob.
+
+\end{enumerate}
+
+%===================================
+\mysection{Exercise 2: Jaccard Similarity}
+
+\begin{enumerate}[label=(\alph*)]
+
+\item % a)
+The table below contains $\mathfrak{J}$accard similarity in the upper triangle and $\mathfrak{J}$accard distance in the lower triangle.
+
+\begin{table}[!ht]
+    \centering
+    \begin{tabular}{c|ccc}
+        $\mathfrak{J}$ & $S_1$ & $S_2$ & $S_3$ \\
+        \hline
+        $S_1$ & & $1/3$ & $2/7$ \\
+        $S_2$ & $2/3$ & & $1/6$ \\
+        $S_3$ & $5/7$ & $5/6$
+    \end{tabular}
+    \caption{$\mathfrak{J}$accard similarity and distance}
+    \label{tab:jaccard}
+\end{table}
+
+\item
+Since we have 
+\[
+|A \cup B| = |A \cap B| + |A \setminus B| + |B \setminus A|,
+\]
+so
+\[
+1 - \frac{|A \cup B|}{|A \cap B|} = \frac{|A \cap B| - |A \cup B|}{|A \cap B|} = \frac{|A \setminus B| + |B \setminus A|}{|A \cap B|}.
+\]
+\end{enumerate}
+
+%===================================
+\mysection{Exercise 3: Similarity Join}
+
+\begin{enumerate}[label=(\alph*)]
+
+\item % a)
+
+With $S_{\mathrm{stop}} = \{\mathrm{it}, \mathrm{is}, \mathrm{of}\}$, after converting all the characters to small, removing punctuation, and removing double spaces, we get
+\begin{align*}
+    & T_1 = \langle \mbox{\textvisiblespace payday} \rangle, \\
+    & T_2 = \langle \mbox{mayday{}\textvisiblespace{}mayday} \rangle, \\
+    & T_3 = \langle \mbox{day{}\textvisiblespace{}may} \rangle.
+\end{align*}
+The index\footnote{\url{https://gist.github.com/angellandros/25a66cee2989dd05e9f4d18aabc4afb8}} is represented in table \ref{tab:index_mayday}.
+
+\begin{table}[!ht]
+    \centering
+    \begin{tabular}{|l|l|}
+        \hline
+        word & docs \\
+        \hline \hline
+        {}\textvisiblespace{}mayd & $\{ T_2 \}$ \\
+        {}\textvisiblespace{}payd & $\{ T_1 \}$ \\
+        ay{}\textvisiblespace{}ma & $\{ T_2, T_3 \}$ \\
+        ayday & $\{ T_1, T_2 \}$ \\
+        day{}\textvisiblespace{}m & $\{ T_2, T_3 \}$ \\
+        mayda & $\{ T_2 \}$ \\
+        payda & $\{ T_1 \}$ \\
+        y{}\textvisiblespace{}may & $\{ T_2, T_3 \}$ \\
+        yday{}\textvisiblespace{} & $\{ T_2 \}$ \\ \hline
+    \end{tabular}
+    \caption{Inverted index}
+    \label{tab:index_mayday}
+\end{table}
+
+\item
+
+For extracting similar documents, we may calculate $\mathfrak{J}$accard similarity directly, or compare the overlap count with the overlap threshold calculated with
+\[
+\mathrm{thr}(D, D', t) = \frac{t}{1+t} \cdot \left( \left| D \right| + \left| D' \right| \right),
+\]
+with $t$ be $\mathfrak{J}$accard similarity threshold, here $t = 0.25$. Representing texts as shingles, we have
+\begin{align}
+    & \hat{T}_1 = \{ \mbox{{}\textvisiblespace{}payd}, \mbox{ayday}, \mbox{payda} \}, \nonumber \\
+    & \hat{T}_2 = \{ \mbox{{}\textvisiblespace{}mayd}, \mbox{ay{}\textvisiblespace{}ma}, \mbox{ayday}, \mbox{day{}\textvisiblespace{}m}, \mbox{mayda}, \mbox{y{}\textvisiblespace{}may}, \mbox{yday{}\textvisiblespace{}} \}, \label{eq:shingles} \\
+    & \hat{T}_3 = \{ \mbox{ay{}\textvisiblespace{}ma}, \mbox{day{}\textvisiblespace{}m}, \mbox{y{}\textvisiblespace{}may} \}. \nonumber
+\end{align}
+
+The table \ref{tab:compare_d2} shows the values of $\mathrm{thr}(\hat{T}_2, \hat{T}_i, \frac{1}{4})$ for $i \in \{1, 3\}$. The $\mathfrak{J}$accard column verifies the results achieved from the overlap threshold. As $\left| \hat{T}_1 \right| = \left| \hat{T}_3 \right| = 3$ and $\left| \hat{T}_2 \right| = 7$ we have $\left| \hat{T}_2 \right| + \left| \hat{T}_i \right| = 10$ and
+\[
+\mathrm{thr}(\hat{T}_2, \hat{T}_i, \frac{1}{4}) = \frac{\frac{1}{4}}{\frac{5}{4}} \cdot 10 = 2,
+\]
+for $i \in \{1, 3\}$.
+
+\begin{table}[!hb]
+    \centering
+    \begin{tabular}{|l|cc|c|}
+        \hline
+        doc & ovr & thr & $\mathfrak{J}$ \\ 
+        \hline \hline
+        $\hat{T}_1$ & 1 & 2 & $\frac{1}{9}$ \\
+        $\hat{T}_3$ & 3 & 2 & $\frac{3}{7}$ \\
+        \hline
+    \end{tabular}
+    \caption{Comparing $\hat{T}_2$ to the other documents}
+    \label{tab:compare_d2}
+\end{table}
+
+One can observe that $\frac{1}{9} < \frac{1}{4}$ and $\frac{3}{7} > \frac{1}{4}$, hence $\hat{T}_3$ is related to $\hat{T}_2$, but $\hat{T}_1$ isn't.
+
+\item
+
+The shingles are already sorted in \eqref{eq:shingles}. With prefix length being
+\[
+\mathrm{pref}(D) = |D| - \left\lceil t \cdot |D| \right\rceil + 1,
+\]
+we have $\mathrm{pref}(\hat{T}_1) = \mathrm{pref}(\hat{T}_2) = 3$ and
+\[
+\mathrm{pref}(\hat{T}_2) = \left| \hat{T}_2 \right| - \left\lceil \frac{1}{4} \cdot \left| \hat{T}_2 \right| \right\rceil + 1 = 7 - \left\lceil \frac{1}{4} \cdot 7 \right\rceil + 1 = 7 - 2 + 1 = 6,
+\]
+hence we can ignore the last element of $\hat{T}_2$:
+\begin{align*}
+    & \hat{T}_1 = \{ \mbox{\underline{{}\textvisiblespace{}payd}}, \underline{\mbox{ayday}}, \underline{\mbox{payda}} \}, \\
+    & \hat{T}_2 = \{ \underline{\mbox{{}\textvisiblespace{}mayd}}, \underline{\mbox{ay{}\textvisiblespace{}ma}}, \underline{\mbox{ayday}}, \underline{\mbox{day{}\textvisiblespace{}m}}, \underline{\mbox{mayda}}, \underline{\mbox{y{}\textvisiblespace{}may}}, \mbox{yday{}\textvisiblespace{}} \}, \\
+    & \hat{T}_3 = \{ \underline{\mbox{ay{}\textvisiblespace{}ma}}, \underline{\mbox{day{}\textvisiblespace{}m}}, \underline{\mbox{y{}\textvisiblespace{}may}} \}.
+\end{align*}
+
+\end{enumerate}
+
+%===================================
+\mysection{Exercise 4: Min-Hashing and LSH}
+
+\begin{enumerate}[label=(\alph*)]
+
+\item % a)
+
+The signature matrix is given in table \ref{tab:minhash}.
+
+\begin{table}[!ht]
+    \centering
+    \begin{tabular}{ccccc}
+        & $S_1$ & $S_2$ & $S_3$ & $S_4$ \\
+        \hline
+        $h_1$ & 2 & 1 & 1 & 2 \\
+        $h_2$ & 1 & 2 & 2 & 1 \\
+        $h_3$ & 1 & 2 & 4 & 1 \\
+        $h_4$ & 1 & 2 & 2 & 1 \\
+        $h_5$ & 1 & 2 & 2 & 1 \\
+        $h_6$ & 1 & 4 & 5 & 1
+    \end{tabular}
+    \caption{Minhash signature matrix}
+    \label{tab:minhash}
+\end{table}
+
+Moreover, the $\mathfrak{J}$accard of sets and their signatures are given in 
+
+\begin{table}[]
+    \centering
+    \begin{tabular}{l||c|c|c|c}
+        $\mathfrak{J}$accard similarity & 1-3 & 1-4 & 2-3 & 2-4 \\
+        \hline \hline
+        between sets       & 0 & 3/4 & 3/4 & 0 \\
+        between signatures & 0 & 1 & 2/3 & 0
+    \end{tabular}
+    \caption{$\mathfrak{J}$accard similarity of sets and minhash signatures}
+    \label{tab:my_label}
+\end{table}
 
 \end{enumerate}
 \end{document}
