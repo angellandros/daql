@@ -70,7 +70,7 @@ Sommersemester 2018 \hfill Mohammad-Ali A'R\^ABI \& Youssef EL-HASSANI\\
 %===================================
 \mysection{Exercise 1: Content-Based Recommender}
 
-\begin{enumerate}[label=(\alph*)]
+\begin{enumerate}[label=\alph*)]
 
 \item % a)
 Given the vector space model $\mathcal{V} = \{\mathrm{costumes}, \mathrm{halloween}, \mathrm{recommender}, \mathrm{system}, \mbox{matrix-factorizatoin}\}$, we can represent the snippets with the vectors lying in the rows of the following table:
@@ -130,7 +130,7 @@ we have $\mathrm{sim}(u_p, D_3) \approx 0.426$ and $\mathrm{sim}(u_p, D_5) \appr
 %===================================
 \mysection{Exercise 2: Jaccard Similarity}
 
-\begin{enumerate}[label=(\alph*)]
+\begin{enumerate}[label=\alph*)]
 
 \item % a)
 The table below contains $\mathfrak{J}$accard similarity in the upper triangle and $\mathfrak{J}$accard distance in the lower triangle.
@@ -162,7 +162,7 @@ so
 %===================================
 \mysection{Exercise 3: Similarity Join}
 
-\begin{enumerate}[label=(\alph*)]
+\begin{enumerate}[label=\alph*)]
 
 \item % a)
 
@@ -229,6 +229,22 @@ for $i \in \{1, 3\}$.
 
 One can observe that $\frac{1}{9} < \frac{1}{4}$ and $\frac{3}{7} > \frac{1}{4}$, hence $\hat{T}_3$ is related to $\hat{T}_2$, but $\hat{T}_1$ isn't.
 
+\begin{table}[b]
+    \centering
+    \begin{tabular}{ccccc}
+        & $S_1$ & $S_2$ & $S_3$ & $S_4$ \\
+        \hline
+        $h_1$ & 2 & 1 & 1 & 2 \\
+        $h_2$ & 1 & 2 & 2 & 1 \\
+        $h_3$ & 1 & 2 & 4 & 1 \\
+        $h_4$ & 1 & 2 & 2 & 1 \\
+        $h_5$ & 1 & 2 & 2 & 1 \\
+        $h_6$ & 1 & 4 & 5 & 1
+    \end{tabular}
+    \caption{Minhash signature matrix}
+    \label{tab:minhash}
+\end{table}
+
 \item
 
 The shingles are already sorted in \eqref{eq:shingles}. With prefix length being
@@ -251,31 +267,13 @@ hence we can ignore the last element of $\hat{T}_2$:
 %===================================
 \mysection{Exercise 4: Min-Hashing and LSH}
 
-\begin{enumerate}[label=(\alph*)]
+\begin{enumerate}[label=\alph*)]
 
 \item % a)
 
-The signature matrix is given in table \ref{tab:minhash}.
+The signature matrix is given in table \ref{tab:minhash}. Moreover, the $\mathfrak{J}$accard of sets and their signatures are given in table \ref{tab:jhash}.
 
-\begin{table}[!ht]
-    \centering
-    \begin{tabular}{ccccc}
-        & $S_1$ & $S_2$ & $S_3$ & $S_4$ \\
-        \hline
-        $h_1$ & 2 & 1 & 1 & 2 \\
-        $h_2$ & 1 & 2 & 2 & 1 \\
-        $h_3$ & 1 & 2 & 4 & 1 \\
-        $h_4$ & 1 & 2 & 2 & 1 \\
-        $h_5$ & 1 & 2 & 2 & 1 \\
-        $h_6$ & 1 & 4 & 5 & 1
-    \end{tabular}
-    \caption{Minhash signature matrix}
-    \label{tab:minhash}
-\end{table}
-
-Moreover, the $\mathfrak{J}$accard of sets and their signatures are given in 
-
-\begin{table}[]
+\begin{table}[!hb]
     \centering
     \begin{tabular}{l||c|c|c|c}
         $\mathfrak{J}$accard similarity & 1-3 & 1-4 & 2-3 & 2-4 \\
@@ -284,8 +282,71 @@ Moreover, the $\mathfrak{J}$accard of sets and their signatures are given in
         between signatures & 0 & 1 & 2/3 & 0
     \end{tabular}
     \caption{$\mathfrak{J}$accard similarity of sets and minhash signatures}
-    \label{tab:my_label}
+    \label{tab:jhash}
 \end{table}
 
+\item
+
+\begin{enumerate}[label=(\alph*)]
+
+\item
+
+The value $s$ at which the probability of becoming a candidate is $1/2$ is approximated by $s \approx (1/b)^{1/r}$. In the case of $L_1$, the threshold is approximately $s_1 \approx (1/3)^{1/2} \approx 0.577$, and in the case of $L_2$ we have $s_2 \approx (1/2)^{1/3} \approx 0.794$.
+
+\item
+
+The signature matrix presented in table \ref{tab:minhash} is divided into bands of 2 row as follows:
+
+\begin{table}[!hb]
+    \centering
+    \begin{tabular}{lccccc}
+        && $S_1$ & $S_2$ & $S_3$ & $S_4$ \\
+        \hline
+        band 1
+        & $h_1$ & 2 & 1 & 1 & 2 \\
+        & $h_2$ & 1 & 2 & 2 & 1 \\
+        \hline
+        band 2
+        & $h_3$ & 1 & 2 & 4 & 1 \\
+        & $h_4$ & 1 & 2 & 2 & 1 \\
+        \hline
+        band 3
+        & $h_5$ & 1 & 2 & 2 & 1 \\
+        & $h_6$ & 1 & 4 & 5 & 1 \\
+        \hline
+    \end{tabular}
+    \caption{Banded minhash signature matrix}
+    \label{tab:minhash_band}
+\end{table}
+
+With the hash function
+\[
+h_{b_i}(S_j) = 3 \times S_j(r \times i - 1) + S_j(r \times i),
+\]
+values of $h_{b_i}(S_j)$ are as represented in table \ref{tab:hashs}.
+
+\begin{table}[!hb]
+    \centering
+    \begin{tabular}{c|cccc}
+        $\star$ & $S_1$ & $S_2$ & $S_3$ & $S_4$ \\
+        \hline
+        $h_{b_1}$ & 7 & 5 & 5 & 7 \\
+        $h_{b_2}$ & 4 & 8 & 14 & 4 \\
+        $h_{b_3}$ & 4 & 10 & 11 & 4
+    \end{tabular}
+    \caption{Values of $h_{b_i}(S_j)$ for $i \in \{1, 2, 3\}$ and $j \in \{1, 2, 3, 4\}$}
+    \label{tab:hashs}
+\end{table}
+
+As the candidate documents are the ones with the same hash values for more than one band, $S_4$ is the one and only candidate for $S_1$ (as has the same hash values for all the bands), and $S_2$ has no candidates (as has at most one similar hash value with any other set).
+
 \end{enumerate}
+
+\end{enumerate}
+
+
+\vspace{2em}
+Mohammad-Ali A'R\^ABI and Youssef EL-HASSANI \\
+Freiburg im Breisgau, 06.06.2018
+
 \end{document}
