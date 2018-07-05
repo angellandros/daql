@@ -1,0 +1,181 @@
+\documentclass[DIN, pagenumber=false, fontsize=11pt, parskip=half]{scrartcl}
+
+\usepackage{tikz}
+\usepackage{tikz-qtree}
+
+\usepackage[utf8]{inputenc}
+\usepackage{textcomp}
+\usepackage{longtable}
+
+\usepackage{amsmath}
+
+% for alphabet items
+\usepackage{enumitem}
+
+\usepackage[bottom=1in,top=1in,left=0.7in,right=0.7in]{geometry}
+\geometry{a4paper}
+
+\usepackage{hyperref}
+
+% fancy header
+\usepackage{fancyhdr}
+
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{Mohammad-Ali A'R\^ABI \& Youssef EL-HASSANI}
+\lhead{DAQL SS2018 :: 5. Exercise Sheet}
+\rfoot{Page \thepage}
+
+\setlength{\parindent}{0em}
+
+% new notation
+
+\newcommand{\prob}[1]{\mathbb{P}\left[ #1 \right]}
+\newcommand{\probm}[2]{\mathbb{P}\left[ #1 ~\middle|~ #2 \right]}
+\newcommand{\D}{\mathcal{D}}
+
+% set section in CM
+\setkomafont{section}{\normalfont\bfseries\Large}
+
+\newcommand{\mytitle}[1]{{\noindent\Large\textbf{#1}}}
+\newcommand{\mysection}[1]{\textbf{\section*{#1}}}
+\newcommand{\mysubsection}[2]{\romannumeral #1) #2}
+
+% fonts
+
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{tgpagella}
+\usepackage[euler-digits,euler-hat-accent]{eulervm}
+\usepackage{amssymb}
+\usepackage{graphicx}
+
+% code hightlighting
+\usepackage{listings}
+\lstset{language=SQL,morekeywords={PREFIX,foaf,movies,xsd}}
+
+
+\newcommand{\inc}[1]{\includegraphics[scale=0.4]{fig#1b.pdf} & \includegraphics[scale=0.4]{fig#1a.pdf}}
+
+%===================================
+\begin{document}
+\thispagestyle{empty}
+
+\tikzset{every tree node/.style={minimum width=2em,draw,circle},
+         blank/.style={draw=none},
+         edge from parent/.style=
+         {draw, edge from parent path={(\tikzparentnode) -- (\tikzchildnode)}},
+         level distance=1.5cm}
+
+\noindent\textbf{Data Analysis and Query Languages} \hfill \textbf{Albert-Ludwigs-Universität Freiburg}\\
+Sommersemester 2018 \hfill Mohammad-Ali A'R\^ABI \& Youssef EL-HASSANI\\
+
+\mytitle{~~~~5. Exercise Sheet: SPARQL1.1 \& nSPARQL \& TriAL \hfill \today}
+
+
+%===================================
+\mysection{Exercise 1: Aggregations, Subqueries, Explicit Negation}
+
+\begin{enumerate}[label=\alph*)]
+
+\item The average of Alice's rating to the action movies is 7.5, while Bob's ratings has an average of 6.5.
+
+\begin{lstlisting}[captionpos=b, caption=SPARQL query :: average of ratings in action genre, label=lst:sparql,
+   basicstyle=\ttfamily,frame=single]
+PREFIX foaf:<http://xmlns.com/foaf/0.1/>
+PREFIX movies:<http://example.org/movies#>
+PREFIX xsd:<http://www.w3.org/2001/XMLSchema#>
+
+SELECT ?user
+       ?genre
+       (AVG(?rating) as ?mean)
+WHERE
+{
+    ?user movies:hasRated   ?x .
+    ?x    movies:hasRating  ?rating ;
+          movies:ratedMovie ?m .
+    ?m    movies:hasGenre   ?genre .
+}
+GROUP BY ?user
+         ?genre
+\end{lstlisting}
+
+\begin{table}[!ht]
+    \centering
+    \begin{tabular}{l|cccc}
+         & action & sci-fi & thriller & drama \\
+        \hline
+        Alice & 7.5 & 4.0 & 8.75 & 3.0 \\
+        Bob & 6.5 & 4.0 & 9.0 & -
+    \end{tabular}
+    \caption{SPARQL query result}
+    \label{tab:my_label}
+\end{table}
+
+\item
+For this part, Alice does not have a similar taste to Bob.
+
+\begin{lstlisting}[captionpos=b, caption=Finding people similar to Bob, label=lst:sparql,
+   basicstyle=\ttfamily,frame=single]
+PREFIX foaf:<http://xmlns.com/foaf/0.1/>
+PREFIX movies:<http://example.org/movies#>
+PREFIX xsd:<http://www.w3.org/2001/XMLSchema#>
+SELECT ?user
+       (MAX(?diff) as ?max)
+WHERE {
+    {
+    SELECT ?user
+           ?genre
+           (AVG(?rating) as ?mean)
+           (AVG(?bobrating) as ?bobm)
+           (ABS(?mean - ?bobm) as ?diff)
+    WHERE
+    {
+        ?user movies:hasRated   ?x .
+        ?x    movies:hasRating  ?rating ;
+              movies:ratedMovie ?m .
+        ?m    movies:hasGenre   ?genre .
+        movies:Bob movies:hasRated   ?y .
+        ?y         movies:hasRating  ?bobrating ;
+                   movies:ratedMovie ?bobm .
+        ?bobm      movies:hasGenre   ?genre .
+    }
+    GROUP BY ?user
+             ?genre
+    }
+}
+GROUP BY ?user
+HAVING (MAX(?diff) < 1)
+\end{lstlisting}
+
+\end{enumerate}
+
+%===================================
+\mysection{Exercise 1: Content-Based Recommender}
+
+\begin{enumerate}[label=\alph*)]
+
+\item 
+
+
+
+
+
+\end{enumerate}
+
+%===================================
+\mysection{Exercise 1: Content-Based Recommender}
+
+\begin{enumerate}[label=\alph*)]
+
+\item 
+
+\end{enumerate}
+
+
+
+\vspace{2em}
+Mohammad-Ali A'R\^ABI and Youssef EL-HASSANI \\
+Freiburg im Breisgau, 05.07.2018
+
+\end{document}
