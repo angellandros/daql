@@ -151,24 +151,106 @@ HAVING (MAX(?diff) < 1)
 \end{enumerate}
 
 %===================================
-\mysection{Exercise 1: Content-Based Recommender}
+\mysection{Exercise 2: nSPARQL}
 
 \begin{enumerate}[label=\alph*)]
 
 \item 
+$ P1 = (?x, (next :: TGV | next :: Seafrance)+, Dover) $\\
+$ [\![P1]\!] = \left\{ \mu| dom(\mu)=\left\{ ?x\right\} and (\mu(?x),Dover) \in [\![(next::TGV|next::Seafrance)+]\!]\right\}$\\
+--\\
+$[\![(next::TGV|next::Seafrance)]\!] = [\![(next::TGV]\!] \cup [\![(next::Seafrance]\!]$\\
+$= (\left\{ (x,y)|(x,TGV,y)\in G\right\} \cup\left\{ (x,y)|(x,Seafrance,y)\in G\right\})$\\
+$= (\left\{ (Paris, Calais),(Paris,Dijon)\right\} \cup\left\{ (Calais, Dover)\right\})$\\
+$= (\left\{ (Paris, Calais),(Paris,Dijon),(Calais, Dover)\right\})$\\
+--\\
+$ [\![P1]\!] = \left\{ \mu| dom(\mu)=\left\{ ?x\right\} and (\mu(?x),Dover) \in [\![(next::TGV|next::Seafrance)+]\!]\right\}$\\
+$ [\![P1]\!] = \left\{\left\{ ?x \Rightarrow Calais \right\},\left\{ ?x \Rightarrow Paris \right\}\right\}$\\
 
+\item 
+$ P2 = (?x, (next :: TGV | next :: Sea france)+, Dover) OPT(?x, next :: country, ?y) $\\
+$ [\![P2]\!] = [\![P1]\!] OPT [\![T(?x, next :: country, ?y)]\!]$\\
+$ [\![P2]\!] = [\![P1]\!]LeftOuterJoin[\![T(?x, next :: country, ?y)]\!]$\\
+--\\
+$[\![(?x, next :: country, ?y)]\!] = \left\{ \mu| dom(\mu)=\left\{ ?x, ?y\right\} and (\mu(?x),\mu(?y)) \in [\![(next::country)]\!]\right\}$\\
+$ [\![(next::country)]\!] = (\left\{ (x,y)|(x,country,y)\in G\right\}$\\
+$ [\![(next::country)]\!] = \left\{ (Paris, France)\right\}$\\
+$[\![(?x, next :: country, ?y)]\!] = \left\{ \mu| dom(\mu)=\left\{ ?x, ?y\right\} and (\mu(?x),\mu(?y)) \in\left\{ (Paris, France)\right\}\right\}$\\
+$ [\![(?x, next :: country, ?y)]\!] = \left\{\left\{ ?x \Rightarrow Paris \right\},\left\{ ?y \Rightarrow France \right\}\right\}$\\
+--\\
+$ [\![P2]\!] = [\![P1]\!]LeftOuterJoin[\![T(?x, next :: country, ?y)]\!]$\\
+$ [\![P2]\!] = \left\{\left\{ ?x \Rightarrow Calais \right\},\left\{ ?x \Rightarrow Paris \right\}\right\}LeftOuterJoin\left\{\left\{ ?x \Rightarrow Paris \right\},\left\{ ?y \Rightarrow France \right\}\right\}$\\
+$ [\![P2]\!] = \left\{\left\{ ?x \Rightarrow Calais \right\},\left\{\left\{ ?x \Rightarrow Paris \right\},\left\{ ?y \Rightarrow France \right\}\right\}\right\}$\\
 
+\item 
+$P3 = (?x, (next :: Seafrance | next :: NExpress)+ / self :: [next :: NExpress = self :: London]
+/ (next :: Seafrance | next :: NExpress)+, ?y)$\\
+--\\
+$(next :: Seafrance | next :: NExpress)+ would return:\\
+\left\{ (Calais, Dover),(Dover, Hastings),(Dover,London)\right\}$\\
+--\\
+After applying $self :: [next :: NExpress = self :: London]$ the result would be:\\
+Dover because London can only be accesed through NExpress from Dover\\
+--\\
+After applying $(next :: Seafrance | next :: NExpress)+$ would return:\\
+$\left\{(Dover, Hastings),(Dover,London)\right\}$\\
+$ [\![P3]\!] = \left\{\left\{\left\{ ?x \Rightarrow Dover \right\},\left\{ ?y \Rightarrow Hastings \right\}\right\},\left\{\left\{ ?x \Rightarrow Dover \right\},\left\{ ?y \Rightarrow London \right\}\right\}\right\}$\\
+\item 
 
+$P4 = (?x, (next :: [(next :: sp) / self :: transport])+, ?y)$\\
+--\\
+$next :: [(next :: sp) / self :: transport]$ would return subjects that have predicates\\
+that are subclasses of transport. The results would be:\\
+$(Paris,Calais), (Paris,Dijon), (Calais, Dover), (Dover,Hastings), (Dover,London)$\\
+Since we apply the expression above more than once we will end up with the following results:\\
+$(Paris,Calais), (Paris,Dijon), (Paris,Dover), (Paris,Hastings), (Paris, London), (Calais, Dover),$\\
+$(Calais, Hastings), (Calais,London), (Dover,Hastings), (Dover,London)$\\
+Thus the result for P4 is the following:
+$ [\![P4]\!] = \left\{\left\{\left\{ ?x \Rightarrow Paris \right\},\left\{ ?y \Rightarrow Calais \right\}\right\},\left\{\left\{ ?x \Rightarrow Paris \right\},\left\{ ?y \Rightarrow Dijon \right\}\right\}...\right\}$\\
+The etc reffers to the order refered above, it will basically have a mapping for every possible route \\
+using any possible transportation.\\
 
-
+\item 
+$P5 = (?x, ((trans(train)|trans(ferry))+ / self :: [trans(type) = sel f :: costal_city]), ?y)$\\
+\item 
+trans can be applied here in order to check if the object is a $costal\_city$.
+\item 
+trans can be applied in the same way as in f. However, the object here will either be a city or a $costal\_city$.
 \end{enumerate}
-
 %===================================
-\mysection{Exercise 1: Content-Based Recommender}
+\mysection{Exercise 3: TriAL}
 
 \begin{enumerate}[label=\alph*)]
 
-\item 
+\item
+The result of the right Kleene closure is:
+
+\begin{table}[!ht]
+    \centering
+    \begin{tabular}{c|c|c}
+        \texttt{St.~Andrew} & \texttt{Bus Op 1} & \texttt{London} \\
+        \texttt{Edinburgh} & \texttt{Train Op 1} & \texttt{Brussels} \\
+        \texttt{Train Op 1} & \texttt{part\_of} & \texttt{NatExpress} \\
+        \texttt{St.~Andrew} & \texttt{Bus Op 1} & \texttt{Brussels} \\
+    \end{tabular}
+    \caption{Kleene right closure}
+    \label{tab:rcl}
+\end{table}
+
+\item
+The result of the left Kleene closure is:
+
+\begin{table}[!ht]
+    \centering
+    \begin{tabular}{c|c|c}
+        \texttt{St.~Andrew} & \texttt{part\_of} & \texttt{NatExpress} \\
+        \texttt{Edinburgh} & \texttt{part\_of} & \texttt{EastCoast} \\
+        \texttt{London} & \texttt{part\_of} & \texttt{EuroStar} \\
+    \end{tabular}
+    \caption{Kleene left closure}
+    \label{tab:lcl}
+\end{table}
+
 
 \end{enumerate}
 
@@ -179,3 +261,4 @@ Mohammad-Ali A'R\^ABI and Youssef EL-HASSANI \\
 Freiburg im Breisgau, 05.07.2018
 
 \end{document}
+
