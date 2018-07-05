@@ -7,17 +7,32 @@
 \usepackage{textcomp}
 \usepackage{longtable}
 
+\usepackage{amsmath}
+
+% for alphabet items
 \usepackage{enumitem}
 
-\usepackage[german]{babel}
-
-\usepackage[bottom=1in,top=0.5in,left=0.7in,right=0.7in]{geometry}
+\usepackage[bottom=1in,top=1in,left=0.7in,right=0.7in]{geometry}
 \geometry{a4paper}
 
 \usepackage{hyperref}
 
+% fancy header
+\usepackage{fancyhdr}
+
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{Mohammad-Ali A'R\^ABI \& Youssef EL-HASSANI}
+\lhead{DAQL SS2018 :: 3. Exercise Sheet}
+\rfoot{Page \thepage}
 
 \setlength{\parindent}{0em}
+
+% new notation
+
+\newcommand{\prob}[1]{\mathbb{P}\left[ #1 \right]}
+\newcommand{\probm}[2]{\mathbb{P}\left[ #1 ~\middle|~ #2 \right]}
+\newcommand{\D}{\mathcal{D}}
 
 % set section in CM
 \setkomafont{section}{\normalfont\bfseries\Large}
@@ -38,6 +53,7 @@
 
 %===================================
 \begin{document}
+\thispagestyle{empty}
 
 \tikzset{every tree node/.style={minimum width=2em,draw,circle},
          blank/.style={draw=none},
@@ -54,27 +70,283 @@ Sommersemester 2018 \hfill Mohammad-Ali A'R\^ABI \& Youssef EL-HASSANI\\
 %===================================
 \mysection{Exercise 1: Content-Based Recommender}
 
-\begin{enumerate}[label=(\alph*)]
+\begin{enumerate}[label=\alph*)]
 
 \item % a)
 Given the vector space model $\mathcal{V} = \{\mathrm{costumes}, \mathrm{halloween}, \mathrm{recommender}, \mathrm{system}, \mbox{matrix-factorizatoin}\}$, we can represent the snippets with the vectors lying in the rows of the following table:
 
 \begin{table}[htb]
 \centering
-\label{my-label}
-\begin{tabular}{|l|ccccc|}
+\label{tab:bob-and-5}
+\begin{tabular}{|l|ccccc|c|}
 \hline
-   & costumes & halloween & recommender & system & matrix-factorization \\
+   & costumes & halloween & recommender & system & matrix-factorization & preference \\
    \hline \hline
-   $D_1$ & 1 & 1 & 0 & 0 & 0 \\
-   $D_2$ & 0 & 1 & 0 & 0 & 0 \\
-   $D_3$ & 1 & 0 & 0 & 0 & 0 \\
-   $D_4$ & 0 & 0 & 1 & 1 & 0 \\
-   $D_5$ & 0 & 0 & 1 & 1 & 1 \\
+   $D_1$ & 1 & 1 & 0 & 0 & 0 & 1 \\
+   $D_2$ & 0 & 1 & 0 & 0 & 0 & 1 \\
+   $D_3$ & 1 & 0 & 0 & 0 & 0 & n/a \\
+   $D_4$ & 0 & 0 & 1 & 1 & 0 & 0 \\
+   $D_5$ & 0 & 0 & 1 & 1 & 1 & n/a \\
    \hline
 \end{tabular}
-\caption{TF representation of the snippets}
+\caption{TF representation of the snippets, together with Bob's preference}
 \end{table}
 
+\item % b)
+Denote Bob's preference by the random variable $\ell$. We are interested in calculating
+\[
+\probm{\ell = 1}{\D_i} = \frac{\prod_j \probm{\D_i^j}{\ell = 1}\prob{\ell = 1}}{\prob{\D_i}},
+\]
+with $\D_i^j$ denoting $D^j = D_i^j$ and $\D_i$ denoting $\bigwedge_j \D_i^j$.
+
+For the case of $i=3$,
+\begin{eqnarray*}
+\prod_j \probm{\D_3^j}{\ell = 1} &=& \probm{D^1 = 1}{\ell = 1} \times \probm{D^2 = 0}{\ell = 1} \times \probm{D^3 = 0}{\ell = 1} \times \\
+&& \probm{D^4 = 0}{\ell = 1} \times \probm{D^5 = 0}{\ell = 1} \\
+&=& 0.5 \times 0 \times 1 \times 1 \times 1 \\
+&=& 0.
+\end{eqnarray*}
+
+Hence $\probm{\ell = 1}{\D_3} = 0$. For the case of $i = 5$ also we have $\probm{D^2 = 0}{\ell=1} = 0$, hence $\probm{\ell = 1}{\D_5} = 0$. So, there won't be any preference between $D_3$ and $D_5$.
+
+\item % c)
+
+We have $D^+ = \{D_1, D_2\}$ and $D^- = \{D_4\}$. So
+\begin{eqnarray*}
+u_p &=& \beta \left( \frac{1}{|D^+|} \sum_{d \in D^+} d \right) - \gamma \left( \frac{1}{|D^-|} \sum_{d \in D^-} d \right) \\
+&=& 0.4 \left( \begin{bmatrix} 1 \\ 1 \\ 0 \\ 0 \\ 0 \end{bmatrix} + \begin{bmatrix} 0 \\ 1 \\ 0 \\ 0 \\ 0 \end{bmatrix} \right) - 0.2 \begin{bmatrix} 0 \\ 0 \\ 1 \\ 1 \\ 0 \end{bmatrix} \\
+&=& \begin{bmatrix} 0.4 & 0.8 & -0.2 & -0.2 & 0 \end{bmatrix}^T.
+\end{eqnarray*}
+
+\item
+Comparing Bob's profile $u_p$ with $D_3$ and $D_5$ with cosine similarity
+\[
+\mathrm{sim}(A, B) = \frac{\left\langle A, B \right\rangle}{\|A\| \cdot \|B\|},
+\]
+we have $\mathrm{sim}(u_p, D_3) \approx 0.426$ and $\mathrm{sim}(u_p, D_5) \approx -0.246$. Hence $D_3$ is recommended to Bob.
+
 \end{enumerate}
+
+%===================================
+\mysection{Exercise 2: Jaccard Similarity}
+
+\begin{enumerate}[label=\alph*)]
+
+\item % a)
+The table below contains $\mathfrak{J}$accard similarity in the upper triangle and $\mathfrak{J}$accard distance in the lower triangle.
+
+\begin{table}[!ht]
+    \centering
+    \begin{tabular}{c|ccc}
+        $\mathfrak{J}$ & $S_1$ & $S_2$ & $S_3$ \\
+        \hline
+        $S_1$ & & $1/3$ & $2/7$ \\
+        $S_2$ & $2/3$ & & $1/6$ \\
+        $S_3$ & $5/7$ & $5/6$
+    \end{tabular}
+    \caption{$\mathfrak{J}$accard similarity and distance}
+    \label{tab:jaccard}
+\end{table}
+
+\item
+Since we have 
+\[
+|A \cup B| = |A \cap B| + |A \setminus B| + |B \setminus A|,
+\]
+so
+\[
+1 - \frac{|A \cup B|}{|A \cap B|} = \frac{|A \cap B| - |A \cup B|}{|A \cap B|} = \frac{|A \setminus B| + |B \setminus A|}{|A \cap B|}.
+\]
+\end{enumerate}
+
+%===================================
+\mysection{Exercise 3: Similarity Join}
+
+\begin{enumerate}[label=\alph*)]
+
+\item % a)
+
+With $S_{\mathrm{stop}} = \{\mathrm{it}, \mathrm{is}, \mathrm{of}\}$, after converting all the characters to small, removing punctuation, and removing double spaces, we get
+\begin{align*}
+    & T_1 = \langle \mbox{\textvisiblespace payday} \rangle, \\
+    & T_2 = \langle \mbox{mayday{}\textvisiblespace{}mayday} \rangle, \\
+    & T_3 = \langle \mbox{day{}\textvisiblespace{}may} \rangle.
+\end{align*}
+The index\footnote{\url{https://gist.github.com/angellandros/25a66cee2989dd05e9f4d18aabc4afb8}} is represented in table \ref{tab:index_mayday}.
+
+\begin{table}[!ht]
+    \centering
+    \begin{tabular}{|l|l|}
+        \hline
+        word & docs \\
+        \hline \hline
+        {}\textvisiblespace{}mayd & $\{ T_2 \}$ \\
+        {}\textvisiblespace{}payd & $\{ T_1 \}$ \\
+        ay{}\textvisiblespace{}ma & $\{ T_2, T_3 \}$ \\
+        ayday & $\{ T_1, T_2 \}$ \\
+        day{}\textvisiblespace{}m & $\{ T_2, T_3 \}$ \\
+        mayda & $\{ T_2 \}$ \\
+        payda & $\{ T_1 \}$ \\
+        y{}\textvisiblespace{}may & $\{ T_2, T_3 \}$ \\
+        yday{}\textvisiblespace{} & $\{ T_2 \}$ \\ \hline
+    \end{tabular}
+    \caption{Inverted index}
+    \label{tab:index_mayday}
+\end{table}
+
+\item
+
+For extracting similar documents, we may calculate $\mathfrak{J}$accard similarity directly, or compare the overlap count with the overlap threshold calculated with
+\[
+\mathrm{thr}(D, D', t) = \frac{t}{1+t} \cdot \left( \left| D \right| + \left| D' \right| \right),
+\]
+with $t$ be $\mathfrak{J}$accard similarity threshold, here $t = 0.25$. Representing texts as shingles, we have
+\begin{align}
+    & \hat{T}_1 = \{ \mbox{{}\textvisiblespace{}payd}, \mbox{ayday}, \mbox{payda} \}, \nonumber \\
+    & \hat{T}_2 = \{ \mbox{{}\textvisiblespace{}mayd}, \mbox{ay{}\textvisiblespace{}ma}, \mbox{ayday}, \mbox{day{}\textvisiblespace{}m}, \mbox{mayda}, \mbox{y{}\textvisiblespace{}may}, \mbox{yday{}\textvisiblespace{}} \}, \label{eq:shingles} \\
+    & \hat{T}_3 = \{ \mbox{ay{}\textvisiblespace{}ma}, \mbox{day{}\textvisiblespace{}m}, \mbox{y{}\textvisiblespace{}may} \}. \nonumber
+\end{align}
+
+The table \ref{tab:compare_d2} shows the values of $\mathrm{thr}(\hat{T}_2, \hat{T}_i, \frac{1}{4})$ for $i \in \{1, 3\}$. The $\mathfrak{J}$accard column verifies the results achieved from the overlap threshold. As $\left| \hat{T}_1 \right| = \left| \hat{T}_3 \right| = 3$ and $\left| \hat{T}_2 \right| = 7$ we have $\left| \hat{T}_2 \right| + \left| \hat{T}_i \right| = 10$ and
+\[
+\mathrm{thr}(\hat{T}_2, \hat{T}_i, \frac{1}{4}) = \frac{\frac{1}{4}}{\frac{5}{4}} \cdot 10 = 2,
+\]
+for $i \in \{1, 3\}$.
+
+\begin{table}[!hb]
+    \centering
+    \begin{tabular}{|l|cc|c|}
+        \hline
+        doc & ovr & thr & $\mathfrak{J}$ \\ 
+        \hline \hline
+        $\hat{T}_1$ & 1 & 2 & $\frac{1}{9}$ \\
+        $\hat{T}_3$ & 3 & 2 & $\frac{3}{7}$ \\
+        \hline
+    \end{tabular}
+    \caption{Comparing $\hat{T}_2$ to the other documents}
+    \label{tab:compare_d2}
+\end{table}
+
+One can observe that $\frac{1}{9} < \frac{1}{4}$ and $\frac{3}{7} > \frac{1}{4}$, hence $\hat{T}_3$ is related to $\hat{T}_2$, but $\hat{T}_1$ isn't.
+
+\begin{table}[b]
+    \centering
+    \begin{tabular}{ccccc}
+        & $S_1$ & $S_2$ & $S_3$ & $S_4$ \\
+        \hline
+        $h_1$ & 2 & 1 & 1 & 2 \\
+        $h_2$ & 1 & 2 & 2 & 1 \\
+        $h_3$ & 1 & 2 & 4 & 1 \\
+        $h_4$ & 1 & 2 & 2 & 1 \\
+        $h_5$ & 1 & 2 & 2 & 1 \\
+        $h_6$ & 1 & 4 & 5 & 1
+    \end{tabular}
+    \caption{Minhash signature matrix}
+    \label{tab:minhash}
+\end{table}
+
+\item
+
+The shingles are already sorted in \eqref{eq:shingles}. With prefix length being
+\[
+\mathrm{pref}(D) = |D| - \left\lceil t \cdot |D| \right\rceil + 1,
+\]
+we have $\mathrm{pref}(\hat{T}_1) = \mathrm{pref}(\hat{T}_2) = 3$ and
+\[
+\mathrm{pref}(\hat{T}_2) = \left| \hat{T}_2 \right| - \left\lceil \frac{1}{4} \cdot \left| \hat{T}_2 \right| \right\rceil + 1 = 7 - \left\lceil \frac{1}{4} \cdot 7 \right\rceil + 1 = 7 - 2 + 1 = 6,
+\]
+hence we can ignore the last element of $\hat{T}_2$:
+\begin{align*}
+    & \hat{T}_1 = \{ \mbox{\underline{{}\textvisiblespace{}payd}}, \underline{\mbox{ayday}}, \underline{\mbox{payda}} \}, \\
+    & \hat{T}_2 = \{ \underline{\mbox{{}\textvisiblespace{}mayd}}, \underline{\mbox{ay{}\textvisiblespace{}ma}}, \underline{\mbox{ayday}}, \underline{\mbox{day{}\textvisiblespace{}m}}, \underline{\mbox{mayda}}, \underline{\mbox{y{}\textvisiblespace{}may}}, \mbox{yday{}\textvisiblespace{}} \}, \\
+    & \hat{T}_3 = \{ \underline{\mbox{ay{}\textvisiblespace{}ma}}, \underline{\mbox{day{}\textvisiblespace{}m}}, \underline{\mbox{y{}\textvisiblespace{}may}} \}.
+\end{align*}
+
+\end{enumerate}
+
+%===================================
+\mysection{Exercise 4: Min-Hashing and LSH}
+
+\begin{enumerate}[label=\alph*)]
+
+\item % a)
+
+The signature matrix is given in table \ref{tab:minhash}. Moreover, the $\mathfrak{J}$accard of sets and their signatures are given in table \ref{tab:jhash}.
+
+\begin{table}[!hb]
+    \centering
+    \begin{tabular}{l||c|c|c|c}
+        $\mathfrak{J}$accard similarity & 1-3 & 1-4 & 2-3 & 2-4 \\
+        \hline \hline
+        between sets       & 0 & 3/4 & 3/4 & 0 \\
+        between signatures & 0 & 1 & 2/3 & 0
+    \end{tabular}
+    \caption{$\mathfrak{J}$accard similarity of sets and minhash signatures}
+    \label{tab:jhash}
+\end{table}
+
+\item
+
+\begin{enumerate}[label=(\alph*)]
+
+\item
+
+The value $s$ at which the probability of becoming a candidate is $1/2$ is approximated by $s \approx (1/b)^{1/r}$. In the case of $L_1$, the threshold is approximately $s_1 \approx (1/3)^{1/2} \approx 0.577$, and in the case of $L_2$ we have $s_2 \approx (1/2)^{1/3} \approx 0.794$.
+
+\item
+
+The signature matrix presented in table \ref{tab:minhash} is divided into bands of 2 row as follows:
+
+\begin{table}[!hb]
+    \centering
+    \begin{tabular}{lccccc}
+        && $S_1$ & $S_2$ & $S_3$ & $S_4$ \\
+        \hline
+        band 1
+        & $h_1$ & 2 & 1 & 1 & 2 \\
+        & $h_2$ & 1 & 2 & 2 & 1 \\
+        \hline
+        band 2
+        & $h_3$ & 1 & 2 & 4 & 1 \\
+        & $h_4$ & 1 & 2 & 2 & 1 \\
+        \hline
+        band 3
+        & $h_5$ & 1 & 2 & 2 & 1 \\
+        & $h_6$ & 1 & 4 & 5 & 1 \\
+        \hline
+    \end{tabular}
+    \caption{Banded minhash signature matrix}
+    \label{tab:minhash_band}
+\end{table}
+
+With the hash function
+\[
+h_{b_i}(S_j) = 3 \times S_j(r \times i - 1) + S_j(r \times i),
+\]
+values of $h_{b_i}(S_j)$ are as represented in table \ref{tab:hashs}.
+
+\begin{table}[!hb]
+    \centering
+    \begin{tabular}{c|cccc}
+        $\star$ & $S_1$ & $S_2$ & $S_3$ & $S_4$ \\
+        \hline
+        $h_{b_1}$ & 7 & 5 & 5 & 7 \\
+        $h_{b_2}$ & 4 & 8 & 14 & 4 \\
+        $h_{b_3}$ & 4 & 10 & 11 & 4
+    \end{tabular}
+    \caption{Values of $h_{b_i}(S_j)$ for $i \in \{1, 2, 3\}$ and $j \in \{1, 2, 3, 4\}$}
+    \label{tab:hashs}
+\end{table}
+
+As the candidate documents are the ones with the same hash values for more than one band, $S_4$ is the one and only candidate for $S_1$ (as has the same hash values for all the bands), and $S_2$ has no candidates (as has at most one similar hash value with any other set).
+
+\end{enumerate}
+
+\end{enumerate}
+
+
+\vspace{2em}
+Mohammad-Ali A'R\^ABI and Youssef EL-HASSANI \\
+Freiburg im Breisgau, 06.06.2018
+
 \end{document}
