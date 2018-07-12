@@ -12,6 +12,7 @@ from collections import namedtuple
 
 DEFAULT_SIM = 0.8
 
+
 class BaselineRecommenderSystem:
     """A basic item-to-item Collaborative Filtering Recommender System
     """
@@ -61,7 +62,7 @@ class BaselineRecommenderSystem:
 
     def loadItemsProperty(self, itemsPropertyFile):
         """This method allows to feed the RS with items properties
-            
+
             For the sake of this unit test, I chose to test if the title was present.
             the object contains all the attributes, only the title was shown for the
             sake of formatting.
@@ -82,12 +83,12 @@ class BaselineRecommenderSystem:
         with open(itemsPropertyFile, 'r', encoding="utf-8") as f:
             for line in f:
                 # For each line, create a dict object out of the JSON line
-                item = json.loads(line, object_hook=lambda d: namedtuple('item', d.keys())(*d.values()))
+                item = json.loads(line, object_hook=lambda d: namedtuple(
+                    'item', d.keys())(*d.values()))
                 # Check if item exists in the items property list
                 if item.asin not in self.itemsProperty:
                     # assign the asin as the key and the object item as value
                     self.itemsProperty[item.asin] = item
-                
 
     def predictRating(self, userId, itemId):
         """This method returns for a given user (the active user) and item a
@@ -119,7 +120,7 @@ class BaselineRecommenderSystem:
         vector1 = [rating[1] for rating in self.ratingsIndex[userId]]
         for rater in ratersList:
             vector2 = [rating[1] for rating in self.ratingsIndex[rater]]
-            similarities[rater] = self.pearsonSimilarity(vector1,vector2)
+            similarities[rater] = self.pearsonSimilarity(vector1, vector2)
         # Neighbor selection
         neighbors = []
         for user, similarity in similarities.items():
@@ -168,14 +169,14 @@ class BaselineRecommenderSystem:
         """
         # Get the items that were not rated by
         ratedItems = [items[0] for items in self.ratingsIndex[userId]]
-        unratedItems = list ( self.items - set(ratedItems))
+        unratedItems = list(self.items - set(ratedItems))
         if not unratedItems:
             return "No unrated items found"
         # Predict ratings for unrated items
         result = []
         for item in unratedItems:
             rating = self.predictRating(userId, item)
-            result.append((item,rating))
+            result.append((item, rating))
         # Sort list based on ratings (descending order)
         result.sort(key=lambda tup: tup[1], reverse=True)
         # Trim result list if it's larger than k
@@ -183,8 +184,6 @@ class BaselineRecommenderSystem:
             return result[:k]
         # else if it's less or equal to k then return the list as it is
         return result
-
-
 
     def cosineSimilarity(self, vector1, vector2):
         """compute cosine similarity of two vectors X and Y
@@ -203,8 +202,7 @@ class BaselineRecommenderSystem:
             xy += x * y
             xx += x * x
             yy += y * y
-        return xy/math.sqrt(xx *yy)
-
+        return xy/math.sqrt(xx * yy)
 
     def pearsonSimilarity(self, vector1, vector2):
         """compute cosine similarity of two vectors X and Y
