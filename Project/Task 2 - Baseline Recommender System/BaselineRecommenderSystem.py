@@ -7,7 +7,7 @@
 import math
 import json
 import html
-
+import sys
 from collections import namedtuple
 
 DEFAULT_SIM = 0.8
@@ -65,7 +65,7 @@ class BaselineRecommenderSystem:
 
             For the sake of this unit test, I chose to test if the title was present.
             the object contains all the attributes, only the title was shown for the
-            sake of formatting.
+            sake of visualisation.
 
          >>> engine = BaselineRecommenderSystem()
          >>> engine.loadItemsProperty("meta_example.json")
@@ -228,3 +228,72 @@ class BaselineRecommenderSystem:
             ydiff2 += ydiff * ydiff
 
         return covariance / math.sqrt(xdiff2 * ydiff2)
+
+    def renderOutput(self, result):
+        """
+        Render the output for the given result. Fetch the
+        the titles and descriptions, and prices of the recommended documents.
+
+        >>> engine = BaselineRecommenderSystem()
+        >>> engine.loadRatings("example.csv")
+        >>> engine.loadItemsProperty("meta_example.json")
+        >>> result = engine.predictTopKRecommendations("Alice",1)
+        >>> engine.renderOutput(result)
+        ... #doctest: +NORMALIZE_WHITESPACE
+        <BLANKLINE>
+        [0mitem6[1
+        [1mBarnes & Noble Nook Simple Touch eBook Reader (Wi-Fi Only)[0m
+        Barnes   Noble Nook Simple Touch Wi Fi ReaderIncredibly easy just touch and read  Ultra light  thin and the longest battery life  Most advanced E Ink 6  display w  crisp fonts  Expert recommendations and fun social features Features   Easy to Use 6  Touchscreen  Shop for the best books  magazines and newspapers right on your NOOK with just a touch  Turn pages  look up words  highlight passages  adjust the font size and style just by tapping the infrared powered touchscreen   Clear  Crisp Reading  NOOK features the most advanced E Ink Pearl technology  The high contrast 16 level grayscale touchscreen displays text as crisp and clear as a printed page  so you can read easily even in bright sun  50  more contrast than NOOK 1st Edition   Ultra Light  Ultra Portable  At 7 48 ounces  NOOK islighter than a paperback and super thin  yet holds up to 1 000 books  magazines and newspapers so it s easy to take your entire library with you anywhere   Longest Battery Life  With the longest battery life of any eReader  you can read for up totwo months on just one charge  That s enough timeto start and finish a lot of great stories or an entire series   World s Largest Bookstore  Over2 million titles including books  magazines   newspapers  just a touch away  Thousands are FREE  most others  9 99 or less  Pre order books and subscribe to magazines so you ll get them the instant they re released   Read Your Way  Make the text bigger or smaller   See demo  Choose the font style you like  You can even add bookmarks and highlight passages while you read   Immersive Reading Experience  With 80  less flashing than other eReaders  NOOK delivers an immersive reading experience so it s easy to lose yourself in your latest read  And with Fast Page  just touch and hold the side button to quickly scan through any book  magazine or newspaper to get to where you want to read lightning fast   NOOK Friends  Connect with NOOK Friends to share and fi
+        Price : 79.49
+        <BLANKLINE>
+        # total recommended items: 1.
+        """
+
+        # Iterate over results
+        for item, rating in result:
+            itemObject = self.itemsProperty[item]
+            asin = item
+            title = itemObject.title
+            desc = itemObject.description
+            price = itemObject.price
+            # Replace html elements into string
+            title = html.unescape(title)
+            desc = html.unescape(desc)
+            # Print the asin in red.
+            asin = "\033[0m%s\033[1" % asin
+            # Print the the title in bold.
+            title = "\033[1m%s\033[0m" % title
+            # reformat price before printing
+            price = "Price : " + str(price)
+            print("\n%s\n%s\n%s\n%s" % (asin, title, desc, price))
+
+        print("\n# total recommended items: %s." % len(result))
+
+
+if __name__ == "__main__":
+    # Parse the command line arguments.
+    if len(sys.argv) < 3:
+        print(
+            "Usage: python3 BaselineRecommenderSystem.py <rating file> <item metadata file>")
+        sys.exit()
+    fileRatings = sys.argv[1]
+    fileMetaData = sys.argv[2]
+
+    # Create a new dict out of the rating file
+    print("Reading from file '%s'." % fileRatings)
+    engine = BaselineRecommenderSystem()
+    engine.loadRatings(fileRatings)
+    print("Ratings successfully loaded")
+    print("Reading Items MetaData file")
+    engine.loadItemsProperty(fileMetaData)
+    print("Item properties successfully loaded")
+
+    while True:
+        # Ask for a user query.
+        query = input("\nYour selected User: ")
+        # Ask for the top k value
+        k = input("\nNumber of desired recommendations: ")
+        # Process the query.
+        result = engine.predictTopKRecommendations(query, int(k))
+        # Render the output.
+        engine.renderOutput(result)
