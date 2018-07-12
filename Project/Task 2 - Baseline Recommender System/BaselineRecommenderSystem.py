@@ -8,7 +8,11 @@ import math
 import json
 import html
 import sys
-from collections import namedtuple
+try:
+    from types import SimpleNamespace as Namespace
+except ImportError:
+    # Python 2.x fallback
+    from argparse import Namespace
 
 DEFAULT_SIM = 0.8
 
@@ -83,8 +87,7 @@ class BaselineRecommenderSystem:
         with open(itemsPropertyFile, 'r', encoding="utf-8") as f:
             for line in f:
                 # For each line, create a dict object out of the JSON line
-                item = json.loads(line, object_hook=lambda d: namedtuple(
-                    'item', d.keys())(*d.values()))
+                item = json.loads(line, object_hook=lambda d: Namespace(**d))
                 # Check if item exists in the items property list
                 if item.asin not in self.itemsProperty:
                     # assign the asin as the key and the object item as value
@@ -257,8 +260,8 @@ class BaselineRecommenderSystem:
             desc = itemObject.description
             price = itemObject.price
             # Replace html elements into string
-            title = html.unescape(title)
-            desc = html.unescape(desc)
+            if title is not None:
+                title = html.unescape(title)
             # Print the asin in red.
             asin = "\033[0m%s\033[1" % asin
             # Print the the title in bold.
@@ -280,13 +283,19 @@ if __name__ == "__main__":
     fileMetaData = sys.argv[2]
 
     # Create a new dict out of the rating file
-    print("Reading from file '%s'." % fileRatings)
-    engine = BaselineRecommenderSystem()
-    engine.loadRatings(fileRatings)
-    print("Ratings successfully loaded")
-    print("Reading Items MetaData file")
-    engine.loadItemsProperty(fileMetaData)
-    print("Item properties successfully loaded")
+    try:
+        print("Reading from file '%s'..." % fileRatings)
+        engine = BaselineRecommenderSystem()
+        engine.loadRatings(fileRatings)
+        print("Ratings successfully loaded")
+        print("Reading from file '%s'..." % fileMetaData)
+        print("Reading Items MetaData file")
+        engine.loadItemsProperty(fileMetaData)
+        print("Item properties successfully loaded")
+
+    except IOError:
+        print("Error: Could not load files")
+        quit()
 
     while True:
         # Ask for a user query.
@@ -294,6 +303,9 @@ if __name__ == "__main__":
         # Ask for the top k value
         k = input("\nNumber of desired recommendations: ")
         # Process the query.
-        result = engine.predictTopKRecommendations(query, int(k))
-        # Render the output.
-        engine.renderOutput(result)
+        try:
+            result = engine.predictTopKRecommendations(query, int(k))
+            # Render the output.
+            engine.renderOutput(result)
+        except ValueError:
+            print("Error: User Not Found")
