@@ -5,6 +5,10 @@
     Summer Semester 2018
 """
 import math
+import json
+import html
+
+from collections import namedtuple
 
 DEFAULT_SIM = 0.8
 
@@ -26,7 +30,7 @@ class BaselineRecommenderSystem:
         >>> engine = BaselineRecommenderSystem()
         >>> engine.loadRatings("example.csv")
         >>> index = sorted(engine.ratingsIndex.items())
-        >>> [(w, [(i, '%.1f' % tf) for i, tf in l]) for w, l in index]
+        >>> [(item, [(i, '%.1f' % rating) for i, rating in l]) for item, l in index]
         ... #doctest: +NORMALIZE_WHITESPACE
         [('Alice', [('item1', '5.0'), ('item2', '3.0'), ('item3', '4.0'),
                     ('item4', '4.0'), ('item5', '1.0')]),
@@ -39,7 +43,6 @@ class BaselineRecommenderSystem:
         ('User4', [('item1', '1.0'), ('item2', '5.0'), ('item3', '5.0'),
                    ('item4', '2.0'), ('item5', '1.0'), ('item6', '1.0')])]
         """
-        result = ""
         with open(ratingsFile, "r", encoding="utf-8") as f:
             for line in f:
                 word = line.split(",")
@@ -58,8 +61,33 @@ class BaselineRecommenderSystem:
 
     def loadItemsProperty(self, itemsPropertyFile):
         """This method allows to feed the RS with items properties
+            
+            For the sake of this unit test, I chose to test if the title was present.
+            the object contains all the attributes, only the title was shown for the
+            sake of formatting.
+
+         >>> engine = BaselineRecommenderSystem()
+         >>> engine.loadItemsProperty("meta_example.json")
+         >>> items = sorted(engine.itemsProperty.items())
+         >>> [(item, html.unescape(object.title)) for item, object in items]
+         ... #doctest: +NORMALIZE_WHITESPACE
+         [('item1', 'Barnes & Noble HDTV Adapter Kit for NOOK HD and NOOK HD+'),
+         ('item2', 'Barnes & Noble OV/HB-ADP Universal Power Kit'),
+         ('item3', 'Audiovox Surface SURF402 Wet/Dry Screen Wipes'),
+         ('item4', 'VideoSecu 24" Long Arm TV Wall Mount Low Profile Full Motion Cantilever Swing & Tilt wall bracket for most 22" to 55" LED LCD TV Monitor Flat Panel Screen VESA 200x200 400x400 up to 600x400mm - Articulating Arm Extend up to 24" MAH'),
+         ('item5', 'Barnes & Noble Nook eReader - no 3G'),
+         ('item6', 'Barnes & Noble Nook Simple Touch eBook Reader (Wi-Fi Only)')]
         """
-        ## TODO: Implement using itemProperty List
+        # Parse Json file
+        with open(itemsPropertyFile, 'r', encoding="utf-8") as f:
+            for line in f:
+                # For each line, create a dict object out of the JSON line
+                item = json.loads(line, object_hook=lambda d: namedtuple('item', d.keys())(*d.values()))
+                # Check if item exists in the items property list
+                if item.asin not in self.itemsProperty:
+                    # assign the asin as the key and the object item as value
+                    self.itemsProperty[item.asin] = item
+                
 
     def predictRating(self, userId, itemId):
         """This method returns for a given user (the active user) and item a
@@ -86,7 +114,7 @@ class BaselineRecommenderSystem:
             potentialSet = [item[0] for item in item]
             if relevantSet.issubset(potentialSet) and user != userId:
                 ratersList.add(user)
-        # Compute pearson similarities
+        # Compute pearson similarities ( pearson was recommended in the lecture )
         similarities = {}
         vector1 = [rating[1] for rating in self.ratingsIndex[userId]]
         for rater in ratersList:
@@ -148,12 +176,12 @@ class BaselineRecommenderSystem:
         for item in unratedItems:
             rating = self.predictRating(userId, item)
             result.append((item,rating))
-        # Sort list based on ratings
+        # Sort list based on ratings (descending order)
         result.sort(key=lambda tup: tup[1], reverse=True)
         # Trim result list if it's larger than k
         if len(result) > k:
             return result[:k]
-        # if it's less or equal to k then return the list as it is
+        # else if it's less or equal to k then return the list as it is
         return result
 
 
