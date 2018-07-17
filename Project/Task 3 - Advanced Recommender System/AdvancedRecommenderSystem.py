@@ -19,9 +19,9 @@ except ImportError:
     from argparse import Namespace
 
 # Default lambda value.
-DEFAULT_LAMBDA = 0.1
+DEFAULT_LAMBDA = 0
 # Default Amount of ALS steps.
-DEFAULT_ITERATIONS = 1
+DEFAULT_ITERATIONS = 20
 
 class AdvancedRecommenderSystem:
     """An advanced item-to-item Collaborative Filtering Recommender System
