@@ -1,6 +1,6 @@
 """
     Data Analysis and Query languages
-    Project - Task 2 : BaseLine Recommender System
+    project - Task 2 : BaseLine Recommender System
     Mohammad A'arabi, Youssef El Hassani
     Summer Semester 2018
 """
@@ -8,6 +8,7 @@ import math
 import json
 import html
 import sys
+import numpy as np
 try:
     from types import SimpleNamespace as Namespace
 except ImportError:
@@ -93,7 +94,7 @@ class BaselineRecommenderSystem:
                     # assign the asin as the key and the object item as value
                     self.itemsProperty[item.asin] = item
 
-    def predictRating(self, userId, itemId):
+    def predictRating(self, userId, itemId, similarity_threshold=DEFAULT_SIM, subset_fuzziness=0.8):
         """This method returns for a given user (the active user) and item a
         predicted rating.
 
@@ -115,8 +116,10 @@ class BaselineRecommenderSystem:
         # Find users that rated the same items
         ratersList = set()
         for user, item in self.ratingsIndex.items():
-            potentialSet = [item[0] for item in item]
-            if relevantSet.issubset(potentialSet) and user != userId:
+            potentialSet = {item[0] for item in item}
+            if len(relevantSet.intersection(potentialSet)) > int(subset_fuzziness * len(relevantSet)) and user != userId:
+                # print(len(relevantSet.intersection(potentialSet)), int(subset_fuzziness * len(relevantSet)), user != userId)
+                # print('Yay!')
                 ratersList.add(user)
         # Compute pearson similarities ( pearson was recommended in the lecture )
         similarities = {}
@@ -128,7 +131,7 @@ class BaselineRecommenderSystem:
         neighbors = []
         for user, similarity in similarities.items():
             # Select only users with more than 80% similarity by default
-            if similarity > DEFAULT_SIM:
+            if similarity > similarity_threshold:
                 neighbors.append(user)
         # Check if neighbors list is empty
         if not neighbors:
@@ -158,11 +161,12 @@ class BaselineRecommenderSystem:
         for user in neighbors:
             similarity = similarities[user]
             mean = neighborsMean[user]
-            rating = itemIdRatings[user]
-            predSum += similarity * (rating - mean)
+            if user in itemIdRatings:
+                rating = itemIdRatings[user]
+                predSum += similarity * (rating - mean)
         return ratingsMean + k * predSum
 
-    def predictTopKRecommendations(self, userId, k):
+    def predictTopKRecommendations(self, userId, k, similarity_threshold=DEFAULT_SIM, subset_fuzziness=0.8):
         """Returns for the active user a list of k recommendations.
 
         >>> engine = BaselineRecommenderSystem()
@@ -178,10 +182,13 @@ class BaselineRecommenderSystem:
         # Predict ratings for unrated items
         result = []
         for item in unratedItems:
-            rating = self.predictRating(userId, item)
+            rating = self.predictRating(userId, item, similarity_threshold, subset_fuzziness)
             result.append((item, rating))
         # Sort list based on ratings (descending order)
-        result.sort(key=lambda tup: tup[1], reverse=True)
+        try:
+            result.sort(key=lambda tup: tup[1], reverse=True)
+        except Exception:
+            pass
         # Trim result list if it's larger than k
         if len(result) > k:
             return result[:k]
@@ -224,13 +231,19 @@ class BaselineRecommenderSystem:
         xdiff2 = 0
         ydiff2 = 0
         for i in range(n):
-            xdiff = vector1[i] - avg_x
-            ydiff = vector2[i] - avg_y
-            covariance += xdiff * ydiff
-            xdiff2 += xdiff * xdiff
-            ydiff2 += ydiff * ydiff
+            try:
+                xdiff = vector1[i] - avg_x
+                ydiff = vector2[i] - avg_y
+                covariance += xdiff * ydiff
+                xdiff2 += xdiff * xdiff
+                ydiff2 += ydiff * ydiff
+            except IndexError:
+                pass
 
-        return covariance / math.sqrt(xdiff2 * ydiff2)
+        try:
+            return covariance / math.sqrt(xdiff2 * ydiff2)
+        except ZeroDivisionError:
+            return np.infty
 
     def renderOutput(self, result):
         """

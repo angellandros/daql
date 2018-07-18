@@ -1,0 +1,267 @@
+# Task 2: Baseline Recommender System
+# Mohammad A'arabi, Youssef El Hassani
+# Output generated using Windows 10 PowerShell
+# Estimated time until results show up : 10 - 15 minutes
+
+PS C:\Users\Youssef\Desktop\Project> python .\BaselineRecommenderSystem.py .\ratings_Electronics_50.csv .\meta_Electronics_50_repaired.json
+Reading from file '.\ratings_Electronics_50.csv'.
+Ratings successfully loaded
+Reading from file '.\meta_Electronics_50_repaired.json'.
+Reading Items MetaData file
+Item properties successfully loaded
+
+Your selected User: A12LH2100CKQO
+
+Number of desired recommendations: 50
+
+[0mB001MRYSKS[1
+[1mBattery for Dell H9685 Y1238 Latitude d500 d505 d600 d610 c1295[0m
+Compatible Models   PNs   Dell H9685 Y1238 Latitude d500 d505 d600 d610 c1295
+Price : 9.18
+
+[0mB002EREH74[1
+[1mKensington Universal Notebook Docking Station with VGA/DVI and Ethernet 4[0m
+Turn your notebook into a desktop in one simple step with the Kensington Universal Notebook Docking Station with VGA DVI and Ethernet  Simply plug a single USB cable into your notebook and you are instantly comfortable and connected to internet via a wired connection  Share this setup with any user  Auto install design makes the initial installation a true  plug n play  experience  No CD software required Auto Install design makes the initial installation a true  plug n play  experience  No CD software required  Perfect for office space shared with multiple users  Auto install supported by all PC running Windows reg  XP and Windows Vista reg Universal compatibility with all brands of notebooks via USB  Acer reg   Asus reg   Compaq reg   Dell reg   Gateway reg   HP reg   IBM reg   Lenovo reg   Sony reg   Toshiba reg  and moreAll the port connectivity you need including 10 100 ethernet to maintain internet connection and avoid wireless hang upsConnect to your high resolution monitor  printer  keyboard and mouse  external hard drive and more from your notebookPlug n play and hot pluggable  so you can connect to the dock and swap devices without shutting downMini Tower design reduces desktop footprintKensington docks  amp  multi display adapter are compatible with Windows 7  If needed  updated drivers can be downloaded at http   us kensington com html 12118 htmlWhich Docking Station Is Right for You
+Price : 99.95
+
+[0mB004MODQOC[1
+[1mTenda W268R 4-Port Switch 150Mbps Wireless-N Broadband Router[0m
+Tenda W268R  4 Port Switch 150Mbps Wireless N Broadband Router
+Price : 18.26
+
+[0mB006UMM2BW[1
+[1mCanon PowerShot G1 X 14.3 MP CMOS Digital Camera[0m
+The Pinnacle of PowerShotBright  fast and more creative than ever  advanced technologies come together for an exciting new camera that moves beyond anything the G Series has seen before  The PowerShot G1 X digital camera will inspire advanced amateurs who have embraced the G Series to explore new realms of photographic expression  and give pros an excellent camera that complements their creative demands The new 1 5 inch High Sensitivity CMOS sensor approaches DSLR size  with a light sensitive area that rsquo s approximately 6 3 times larger than that of the PowerShot G12 digital camera  The new 14 3 Megapixel sensor  combined with a new lens and DIGIC 5 Image Processor  creates the HS SYSTEM that delivers image quality previously impossible in a compact camera  with beautiful blur  lower noise  and extraordinary resolution in low light shooting and can shoot at ISOs of up to 12800  The PowerShot G1 X also has 14 bit RAW capabilities for even greater creative control and Full HD Video recording  Manual settings and operability inherited from EOS cameras impart a high level shooting experience  and open the door to new creative possibilities  Substantive luxury defines the design  a neatly clarified sculpture with a firm grip  huge Vari angle LCD and optical viewfinder Canon DIGIC 5 Image ProcessorThe latest generation Canon DIGIC 5 Image Processor brings phenomenal increases in processing speed and power  Improved chip architecture and algorithms deliver greatly expanded functionality with further refinement in image quality  Improved noise reduction produces clearer images when shooting in low light at high ISO speeds  Enhanced i Contrast performance adjusts differences between light and dark areas to achieve even more natural looking results  The faster processing speed also results in faster continuous shooting capability  The DIGIC 5 Image Processor also makes possible a new  highly advanced automatic white balance system  Whereas conventional white balance makes an overall adjustment based on a single type of light source  the new Canon Multi Area White Balance analyzes several areas of the image to determine whether different adjustments are needed  for example  for the main subject and the background Canon 1 5 inch  14 3 Megapixel High Sensitivity CMOS SensorCanon engineers developed a sensor for PowerShot G1 X digital camera that is nearly the size of an EOS DSLR camera rsquo s APS C sized sensor  and built with a similar pixel structure mdash each pixel site is larger  allowing more light to be captured mdash giving the PowerShot G1 X a completely different level of image quality than compact cameras that have come before it  At 1 5 inches  the sensor is approximately 6 3 times larger than that of the PowerShot G12 digital camera  This heightened degree of sensitivity  along with 14 3 Megapixels  delivers several distinct advantages  Noise is dramatically reduced at high ISO speeds for clear low light and nighttime shooting  Resolution at low ISO speeds is incredibly rich and precise  And  most atypically for a compact camera  the PowerShot G1 X digital camera allows you to create the intensely beautiful background blur that is the hallmark of DSLR cameras  nbsp Canon HS SYSTEMThe Canon HS SYSTEM lets you take bright  clear photos in an even wider range of shooting situations Beautiful low light shots are possible with minimal noise and maximum detail in highlight and shadow areas  The system is the result of two technologies brought together in PowerShot cameras  a high sensitivity imaging sensor  which is able to capture more light  and the DIGIC Image Processor  which actively reduces noise with high speed image processing  The 14 3 Megapixel Canon CMOS sensor in the PowerShot G1 X incorporates advanced light reception technology that enhances sensitivity  The new DIGIC 5 Image Processor provides a major boost in noise reduction  expanding the usable range to an amazingly high ISO 12800  The HS SYSTEM thus lets you use higher shutter speeds to capture clearer images with reduced noise and blur Shooting and Recording Modes Including 14 bit RAW   JPEGThe PowerShot G1 X offers a host of shooting and recording modes ranging from fully automatic to fully manual  plus Full HD movies and full resolution High Speed Burst HQ at a maximum of 6 frames   The camera recognizes 32 shooting situations  automatically optimizing settings for achieving the highest quality shots on the go  Alternatively  you can exert complete creative control over the look and feel of your images  14 bit signal processing  just as in EOS series cameras  gives images notably rich detail and smooth gradation  Compared with 12 bit processing  14 bit offers a 4x increase in RAW data  makes a visible impact  giving images rich detail in both highlights and shadows as well as smoother  more natural tonal gradation for outstanding image quality  Continuous shooting speed is 4 5 fps Canon Full HD Video Advantage  x2028 In addition to the HS SYSTEM  the combination of the advanced CMOS sensor and DIGIC 5 Image Processor in the PowerShot G1 X digital camera makes it possible to shoot crisp  clear high definition video  Imagine the fun and excitement of being able to shoot spectacular 1080p Full HD video with stereo sound that you can later watch on your HDTV or download to your computer to share with family and friends  In addition to being able to shoot Full HD 1080p video at 24  frames per second  the PowerShot G1 X digital camera can also shoot 720p HD video at 30   frames per second  Actual frame rate is 23 976 fps   Actual frame rate is 29 97 fps Dedicated Movie Button  Wind filter feature and Optical Zoom for easy video captureIt rsquo s never been easier to shoot videos with a PowerShot digital camera  The PowerShot G1 X has a dedicated moviebutton that lets you start and stop recording instantly  There is no need to go through layers of menus or operate switches or dials to switch to and from video recording mode  The camera is always ready to shoot stills or video whenever you want  The PowerShot G1 X also incorporates an electronic wind filter  which suppresses wind noise that can muffle or distort the sound  And unlike less sophisticated point and shoot cameras  the PowerShot G1 X lets you use the full range of optical zoom when you rsquo re shooting a video HDTV Playback via HDMI with CEC SupportIt rsquo s easy to enjoy and share the videos you shoot with the PowerShot G1 X  Simply connect its HDMI terminal to your HDTV using an HDMI cable  And because the PowerShot G1 X supports HDMI CEC technology  you rsquo ll be able to control the playback of your images and videos on any CEC enabled HDTV using the TV rsquo s remote control   CEC  ndash  Consumer Electronic Control  ndash  is part of the HDMI specification  enabling components in a system to communicate with one another
+Price : 549.0
+
+[0mB0014Z29SQ[1
+[1meforCity 217684 2-PACK 10-Feet High Speed HDMI Cable for HDTV 1080P (Discontinued by Manufacturer)[0m
+A premium quality HDMI HDMI cable suitable for use in HDTV  Home Theater  and business class projector based applications  Features gold plated connectors  molded strain relief  and Mylar foil shielding  Cable constructed using the high quality material for best contact connection between HDMI equipment s  Fully HDCP compliant to provide highest level of signal quality  Compatible with  multiple audio formats from stereo to multi channel sound  Transfer Digital Audio and Video signals at warp speed of 5 Gigabits per second approximately  A superb cable with excellent audio visual transfer properties that deliver signal without compromising purity and balance  Digital video doesn t get any better than this  Features  Gold plated connectors for highest signal transfer rate and resistance in corrosion  Large gauge PVC jacket provides maximum shielding against wear and tear and extreme temperatures  Reinforced quad layer braided shielding and Mylar foil shielding provides utmost protection against RF and EM interference  Molded strain relief design lessens plug socket pressure  Designed to meet all HDMI standards  Supports 480i  480p  720p  1080i  1080p resolution  Color  Black  Cable Length  3 meters  9 8 ft   NOTE  Even though HDMI cables support Hot Plug Detection  improper usage might result in resetting   restarting both devices  or even may cause damage to the devices  Therefore  we do not suggest Hot Plug action for any HDMI cables  Please make sure both input and output devices are off when plugging or unplugging HDMI cables
+Price : 5.09
+
+[0mB006EWUO22[1
+[1mCorsair Vengeance  16GB (2x8GB)  DDR3 1600 MHz (PC3 12800) Desktop Memory (CMZ16GX3M2A1600C10)[0m
+
+Price : 184.77
+
+[0mB00007B8R9[1
+[1mSanDisk 256 MB Ultra CompactFlash Card[0m
+SDCFH256784 SANDISK SanDisk 256MB Ultra Compact Flash  CF  Memory Card
+Price : 29.99
+
+[0mB000URBQSS[1
+[1mApple Mac Pro Desktop (Two 3.0 GHz Quad Core Intel Xeon Processors, 2 GB RAM, 320 GB Hard Drive, 16x SuperDrive)[0m
+The Mac Pro Quad Core Desktop Computer Workstation from Apple is the company s premiere desktop workstation  The system is built with performance in mind  and is an ideal computer for use with demanding applications  The computer is housed in a striking tower form factor  highlighted by a silver front grille which provides easy access to USB 2 0 and FireWire 800 ports  as well as a headphone jack  Sturdy handles are present to aid in transporting the system when necessary
+Price : 74.99
+
+[0mB00GNRFWZW[1
+[1mAlbinar 2 in 1 4" Hand Pistol Grip Mini Tripod For Digital Cameras and Camcorders[0m
+Albinar 2 in 1 4  Hand Grip Mini Tripod For Digital Camera and CamcorderFeaturesNew Design 2in1 Hand Held Grip   Mini Tripod Special for digital cameras and camcordersHand grip specially designed to fit comfortably in your handMade of durable light weight plasticSkid proof rubber soles keep the tripod from sliding on smooth surfaces1 4 Standard Screw  suitable for most cameras and camcordersSpecificationsTotal Length  16cm  6 1 4  Tripod Length  10cm  4  Max Load Capacity  0 5kg  1lb Material  Plastic Contains  2in1 Hand Held Grip  Mini Tripod x1Original Manufactory PackageCompatible with Cameras and Camcorders that use a 1 4  Screw Mount
+Price : 6.95
+
+[0mB006K7MQQI[1
+[1mThink Tank Keep It Up Strap[0m
+Provides flexible support for any Pro Speed Belt  Steroid Speed Belt  or Thin Skin Belt Quickly adjustable for on the go action Easily switch between shoulders for maximum comfort Converts any modular skin component into a shoulder bag
+Price : 30.75
+
+[0mB00067CAYG[1
+[1mCoolmax CD-510-U2 Gemini 3.5-Inch/5.25-Inch External Hard Drive Enclosure[0m
+COOLMAX 3 5 5 25IN USB ENCL CD 510 U2
+Price : 44.0
+
+[0mB003BYRQNQ[1
+[1mPopBox Media Player[0m
+
+Price : None
+
+[0mB005MIZYPQ[1
+[1mLG Infinia 42LV5400 42-Inch 1080p 120 Hz LED-LCD HDTV with Smart TV[0m
+
+Price : 599.0
+
+[0mB00CSHCAVU[1
+[1mEasyAcc Aluminum SuperSpeed USB 3.0 8 Port Charging Station Hub with 4 Quick Charging and 4 Standard USB 3.0 Ports (Y44BUS)[0m
+
+Price : 40.99
+
+[0mB00009R9EO[1
+[1mHoya 77mm UV (Ultra Violet) Multi Coated Glass Filter[0m
+Absorbs the ultraviolet rays which often makes outdoor photographs hazy and indistinct  A muliti purpose fine weather filter for color as well as black and white films  Also serves as a permanent lens protector HMC  Hoya Multi Coating These popular filters are renowned for their ability to minimise reflection at the filter surfaces which reduces flare and ghosting  The result is an average light transmission of over 97   giving sharp contrast and well balanced color  HOYA HMC filters are recommended for enhancing the performance of today s multicoated lenses
+Price : 33.9
+
+[0mB0009RKL6C[1
+[1mTDK 16X DVD+R 50 Pack Spindle[0m
+TDK 4 7GM DVD R media offers the widest compatibility with computer drives and home DVD players   Ideal for general purpose recording  a single TDK DVD R has ample capacity for thousands of digital photos  up to six hours of videa and large mission critical data files   Each DVD R disc can be fully recorded once   As DVD recording speeds have increased  the importance of using name brand  quality media has become paramount   When a DVD R is recorded at high sppeds  the fast RPM s of the recording process require an advanced  ulrra sensitive recording material capable of compensating for the abbreviated exposure to the drive laser   Specially formulated with a rapid phase change recording layer  TDK DVD R media maximizes the data transfer rate while minimizing the potential for errors   The discs have been thoroughly tested and verified to outperform other media brands  which may rely on slow reacting  error prone phase change materials   TDK AVIST metallic alloys change between crystalline and amorphous states in response to the heat generated by a laser for phase change recording   The differences in reflectivity exhibited by the alloy in its crystalline and amorphous states are read as data   TDK AVIST alloys are designed for the most precise laser response  resulting in perfect data marks and superior recording and playback performance
+Price : 15.99
+
+[0mB0019M6GS8[1
+[1mSwissGear Computer Backpack (Black)[0m
+This stylish backpack includes a mobile phone pocket  a computer compartment  an airflow back system  shoulder straps  a water bottle pocket  audio interface organizer pockets for business accessories  and a sunglasses holder
+Price : None
+
+[0mB0055CARAQ[1
+[1mThe Sharper Image ESI-A682 Ambience Home Audio Docking Station for iPod, iPhone and iPad[0m
+The Ambience charges and plays iPad  iPhone  and iPod  Two powerful 20W speakers with integrated subwoofer provide excellent sound  A Motorized Apple dock and illuminated controls let you use component video out for watching HD movies and videos
+Price : 136.64
+
+[0mB000JSS8NE[1
+[1mOpteka 95mm High Definition² UV (0) Ultra Violet Haze Multi-Coated Glass Filter[0m
+A UV filter is one of the most important filters to own and it should be available for every lens  The filter blocks the invisible UV rays which can cause a loss of sharpness  The use of the filter is particularly recommended for work in the mountains  at the ocean  and in areas with very clear air  The contrasts are heightened  and distorting fog is avoided  The Opteka HD Multi Coated UV  0  Ultraviolet Haze Filter cuts haze for sharper black and white prints and corrects the blues and violets in color prints  The filter glass is colorless  and hence no increase in the exposure time is required  Multi coating can prevent light reflection  ghost light  internal reflection etc  making image clearer and sharper  It can dramatically improve image quality  This is specially important in digital cameras  Since the image sensors CCD or CMOS are highly susceptible to reflections  this stray light can ruin your photographs  Multi coated glass benefit substantially reduced light reflections  resulting clearer image with greater contrast  This type of filter is also eminently suitable as protection for the front lens  and because of its color neutral properties it can remain on the camera lens permanently  A scratched front lens element can not be repaired  and replacement is costly  Exchanging a damaged UV filter for a new one is more economical than the purchase of a new lens  Advances in high index   low dispersion optical glasses  new barrel materials  and exotic anti reflection coatings  along with the latest in computer aided design   computer aided manufacturing  are combined to produce lenses of unprecedented quality  Nothing changes the way you see the world like High Definition  and no company does High Definition like Opteka  In the professional setting  Opteka s glass optics define High Definition  Change the way you view the world  Enjoy outstanding detail  enjoy enhanced clarity  enjoy Opteka
+Price : 49.95
+
+[0mB005CLCJA6[1
+[1mGenssi 36V DC 9.7A 350W Regulated Switching Power Supply[0m
+Dimensions 21511550mm Weight 1 15Kgs Warranty 1 Year Output DC Voltage 36V Rated Current 9 7A Current Range 0   9 7A Rated Power 350W Ripple   Noise  max  240mVp p Voltage Adjustment Range 32 40V Voltage Tolerance    1 0  Line Regulation     5  Load Regulation     5  Setup   Rise Time 200ms   50ms at full load Hold up Time  typ  20ms at full load Efficiency 83  Input Voltage Range 85 132VAC 180 264VAC selected by switch  47 63Hz 254 370VDC Input current 6 5A 115V 4A 230V AC Inrush current 25A 115V 50A 230V Leakage current  lt 3 5mA 240VAC Overload protection 105  150  Type pulsing hiccup shutdown Reset  auto recovery Over voltage protection 40 5 46 5V High temperature protection ERH1 gt  65  Fan on   55  Fan off  70  Cut off output 5 15  ERH1  70  Fan on   65 Fan off   80  Cut off output 24 48V  Temperature coefficient 0 03    0 50   Setup rise hold up time 200ms 100ms 20ms Vibration 10 500Hz 2G 10min  1cycle Period for 60min each axes Withstand voltage Input and output internal 1 5KVAC Input and enclosure 1 5KVAC Output and enclosure 0 5KVAC Isolation resistance Input and output internal  Input and enclosure  Output and enclosure 500VDC 100ME Working temperature and humidity  10   60  Refer to output derating curve  20  90 RH Store temperature and humidity  20   85  10  95 RH Saftey Standards Design refer to UL1950 Design refer FCC PART15 J Conduction class A
+Price : 39.99
+
+[0mB00I45GT3A[1
+[1mRazer Adaro Wireless Bluetooth Headphones[0m
+
+Price : 150.81
+
+[0mB000NAXC6G[1
+[1mBelkin USB 2.0 Plus Hub (7 Port) F5U307-BRN[0m
+Featuring a sleek look that combines dark brown and cream  the Belkin USB 2 0 Plus 7 Port Hub  F5U307 BRN  lets you connect up to seven peripherals through a single open port on your PC or Mac  Two top load ports offer easy access for thumb drives and card readers  while five side ports are ideal for printers  scanners  and other more substantial devices  Also offering cord management  the stackable Plus Hub supports both USB 2 0 and USB 1 1 devices  In addition  plug and play installation makes adding it to your existing system quick and easy USB 2 0 Plus 7 Port HubAt a Glance Compact  stackable design weighted to stay in place and upright7 USB 2 0 downstream ports including 2 top loading portsCompatible with both USB 2 0 and USB 1 1 devicesConvenient plug and play installationOver current protection guards your computer and peripheralsBacked by a lifetime warrantyTwo top loading ports provide quick access View larger Plug and play installation gets you up and running quickly View larger High Speed Convenience with Seven USB 2 0 PortsThe Belkin USB 2 0 Plus Hub features seven USB 2 0 downstream ports for fast  efficient data transfers  In addition  it s backward compatible with USB 1 1 devices  which means you can keep older generation peripherals up and running while maximizing the high speed performance of new devices Cord Management for Reduced ClutterCompact and elegant  the Plus Hub offers a unique configuration with two of its downstream ports situated on the top of the case  providing extremely easy access when you re using thumb drives  USB lights  media readers  and other portable peripherals  The remaining five ports are located on the side  and are positioned for optimal use with the Plus Hub s integrated cable management feature  This unique design also includes an internal weight and stay put pads to keep it upright and anchored securely on your desk Stackable for Multiple Hub UseIf you need more than seven USB ports to keep your whole system running  the Plus Hub s design allows you to stack another USB 2 0 Plus Hub  7 Port  on top of your existing Plus Hub to maximize connection points and save valuable desktop space Cord Free Power with Over Current ProtectionThe Plus Hub requires no external power supply for use with most devices  which means an even further reduction of cord tangles and desk clutter  In addition  a convenient LED makes monitoring its power status easy The smart design also works to prevents damage to your expensive computer and USB devices by providing over current protection Plug and Play InstallationA plug and play setup gets the seven port Plus Hub up and running quickly and easily  Simply connect the Hub to your computer using a USB cable  sold separately    follow the on screen directions  and start connecting devices System Requirements and Warranty InformationThe Plus Hub works with a broad range of systems  For PC Users  it supports use with Windows 98  2000  ME  XP  or Vista  For Mac Users  it supports OS 9 to OS 10 The Belkin USB 2 0 Plus Hub  7 Port  is backed by a lifetime warranty What s in the BoxUSB 2 0 Plus Hub  7 Port   AC power adapter  and manual USB HubsUSB 2 0 4 PortUltra Mini HubHi Speed USB 2 04 Port HubHi Speed USB 2 0 7 Port Lighted Hub  Black Hi Speed USB 2 0 7 PortLighted HubHi Speed USB 2 0 7 PortMobile HubPorts44777USB 2 0YesYesYesYesYesUSB 1 1YesYesYesYesYesUSB PoweredYesNoNoNoNoAC PoweredNoYesYesYesYesUSB HubsUSB 2 04 Port HubUSB 2 0 PlusHub  4 Port USB 2 0 Plus7 Port HubHigh Speed USB 2 07 Port Hub2 in 1 USB 2 07 Port HubPorts44777USB 2 0YesYesYesYesYesUSB 1 1YesYesYesYesYesUSB PoweredNoNoNoNoNoAC PoweredYesYesYesYesYes
+Price : 48.6
+
+[0mB007QSCNYU[1
+[1mReplacement Battery for Sony NP-F960 NP-F970 NP-F975[0m
+Compatible with Digital Camera Models  Sony CCD TR Series Sony CCD TR1 CCD TR200 CCD TR215 CCD TR3 CCD TR300 CCD TR3000 CCD TR3300 CCD TR416 CCD TR500 CCD TR516 CCD TR517 CCD TR555 CCD TR57 CCD TR67 CCD TR76 CCD TR818 CCD TR84 CCD TR87 CCD TR910 CCD TR917 CCD TR930 CCD TR940 CCD TRT97 DCR TR7000  Sony CCD TRV Series Sony CCD TRV101 CCD TRV11 CCD TRV119 CCD TRV16 CCD TRV215 CCD TRV25 CCD TRV3000 CCD TRV315 CCD TRV35 CCD TRV36 CCD TRV37 HI8 CCD TRV4 CCD TRV41 CCD TRV43 CCD TRV46 CCD TRV51 CCD TRV517 CCD TRV57 CCD TRV57 HI8 CCD TRV58 CCD TRV615 CCD TRV62 CCD TRV65 CCD TRV66 CCD TRV67 CCD TRV68 CCD TRV715 CCD TRV716 CCD TRV72 CCD TRV720 CCD TRV75 CCD TRV78E CCD TRV81 CCD TRV815 CCD TRV82 CCD TRV85 CCD TRV87 CCD TRV88 CCD TRV90 CCD TRV91 CCD TRV93 CCD TRV95 CCD TRV98 CCD TRV99 DCR TRU47E DCR TRV103 DCR TRV110 DCR TRV120 DCR TRV130 DCR TRV210 DCR TRV310 DCR TRV315 DCR TRV320 DCR TRV5 DCR TRV510 DCR TRV520 DCR TRV525 DCR TRV7 DCR TRV720 DCR TRV820 DCR TRV9 DCR TRV900  Sony DCR TV900 DCR TV900E CCD SC55 CCD SC65DCR VX2000 DCR VX2100 DCR VX700 DCR VX9 Sony DSR 200 DSR PD100A GV A500 GV A500E GV D200 GV D800 HDR FX1 HDR FX1E HVR Z1U PLM 100 DCM M1 DCR PC7 DCR SC100
+Price : 15.29
+
+[0mB0041RSJZQ[1
+[1mHuman Toolz 3-in-1 Notetbook Pad (Galaxy Navy)[0m
+The Human Toolz 3 in 1 Notebook Pad functions as a screen protector  screen cleaner  and a mouse pad   The incredible thin and light design of this multi function pad was created so that it can easily be stored in your notebook computer   When used as a screen protector  the microfiber surface will delicately protect your notebook screen   Simply place the 3 in 1 Notebook Pad on top of the keyboard when closing your notebook to prevent keycap marks on your screen   As a screen cleaner  use the soft microfiber surface to wipe smudges  marks and fingerprints off your notebook screen   And best of all  the 3 in 1 Notebook Pad can be used as a mouse pad   It works great with your mouse to personalize your workspace and provide a quality surface with a non slip base for great mouse performance   As an additional benefit and for peace of mind  the Human Toolz 3 in 1 Notebook Pad is protected with the AEGIS Microbe Shield
+Price : 7.66
+
+[0mB001F1BBJ2[1
+[1mLink Depot 5-Feet Ethernet Enhanced CAT6 Networking Cable, Black (C6M-5-BKB)[0m
+The Link Depot 5  Ethernet Enhanced CAT6 Networking Cable is a fast and dependable Ethernet connection solution
+Price : 4.25
+
+[0mB0029U2YPS[1
+[1mCamera Armor Protective Case for Nikon D3 (Black)[0m
+We shield while you shoot  Camera Armor is a line of rugged  custom fit SLR digital camera cases engineered to provide maximum protection from impact and abrasion while allowing full access to all features of the camera  The four part system includes Body Armor  Lens Armor  LCD Shield  and Lens Cap Leash  We love our cameras as much as you do  That s why we designed Camera Armor   the only choice for full time protection  Each model is engineered to provide maximum protection while allowing full access to all controls  compartments  and ports  You focus on the shot   we ve got you covered
+Price : None
+
+[0mB0040702HA[1
+[1mFlip UltraHD Video Camera - Black, 8 GB, 2 Hours (3rd Generation)[0m
+
+Price : 389.99
+
+[0mB000G18DR0[1
+[1mPhilips DVP5960 DVD Player with HDMI, 1080i Upscaling, DivX Ultra, USB direct[0m
+DVD  HDMI  1080i Upsampling   DivX Ultra 6  Mpeg 4 Video   Ultra Slim design  Progressive Scan  Plays CD  MP3  DVD  DVD   R RW  CD RW  JEPG Pictures USB Connect to play all your favorite music or digital pictures  Windows Media
+Price : 69.8
+
+[0mB001HLA3MG[1
+[1mCaseCrown 10-Inch Netbook Premium Memory Foam Pouch Case with Front Pocket (Black)[0m
+None
+Price : None
+
+[0mB00064OO7K[1
+[1mKonica-Minolta AF 17-35mm F/2.8-4 (D) wide angle lens for Sony/Minolta A-Mount SLR & DSLR[0m
+A wide angle  zoom lens with high resolution and brightness  Features a circular iris with excellent defocusing characteristics and Advanced Distance Integration  ADI  for enhanced flash shooting performance About the Dynax Lens SystemAspherical Lenses  Minolta retains a distinct advantage in the use of aspherical optics  With ordinary spherical lenses  the focal point varies according to whether the incident light passes through the central or peripheral part of the lens  thus producing spherical aberration  While perfect compensation has never been achieved  and is particularly difficult to compensate for in large diameter lenses  decreasing the lens curve or combining dispersion lenses are methods commonly used in an attempt to compensate for spherical aberration  Minolta s aspherical lenses are developed not only to correct spherical aberration in large diameter lenses  but also to take high contrast images with less blotting effects while in the largest aperture  Minolta s aspherical lenses are effective in correcting distortion while using wide and standard zooms  What s more  the use of aspherical lenses decreases the total number of lenses required to produce a complete lens This technology has enabled Minolta to create more compact lenses AD Glass  AD  Anomalous Dispersion  glass decreases chromatic aberration more than normal optical glass  to prevent a decrease in resolving power which occurs when the focal length increases  The unique AD glass developed by Minolta enables vivid reproductions when using large diameter telephoto lenses and telephoto zoom lenses Circular 7  or 9 Blade Aperture  The closer the aperture shape is to becoming a perfect circle  the more beautiful your defocused effect will be  That s why Minolta s specially designed aperture blades produce a circular opening from their widest setting down 1 5 steps to help smooth a scene s out of focus areas  When you take a picture with sunlight shining through foliage  a picture at sunset or a picture of neon lights  the source of the light can be defocused beautifully  The number of aperture blades must be maximized to make the aperture as perfectly circular as possible  Conversely  each blade can be curved to produce a circular aperture  and thus a desired blurring effect
+Price : None
+
+[0mB00007LB2N[1
+[1mBushnell ImageView 10x25 VGA Digital Camera Binocular[0m
+Combining a pair of binoculars with a digital camera is a brilliant idea with endless possibilities  with useful applications from birdwatchers documenting their greatest  catches  to parents zooming in on their kids on the playing field  Unfortunately  Bushnell  x92 s Imageview digital binoculars  which integrate digital imaging into a pair of 10x25 binoculars  may be ahead of their time The image quality of the binoculars isn  x92 t a problem  as they employ clear optics that allow for sharp focusing at the fixed 10x zoom level  Build quality also is good  with thick rubber coating on the sides to ensure a good grip and fold down rubber eyecups to accommodate eyeglass wearers  The small 25mm objective lenses  however  don  x92 t provide substantial light gathering but do keep the design as small and light as possibleThe built in camera will be the real problem for most users  It uses a low resolution CCD that snaps pictures at a fixed resolution of 640 x 480  which is fine for e mail but not adequate for making prints  To make matters worse  most of the shots we took were grainy  with lots of compression artifacts and subpar color If you can live with those limitations  the camera does have the benefits of ease of use and plenty of image storaging capacity  With 8 MB of built in memory  we snapped nearly 150 pictures before connecting the camera to a PC  No image preview is available  but a basic black and white LCD display on top of the camera tells you how many pictures you  x92 ve snapped and the selected mode With a better digital camera and removable memory slots  this idea of a high quality camera binocular hybrid could realize its full potential  However  the image quality compromises imposed by the Imageview will be too much for many to bear  regardless of the low price   T  Byrl BakerPros Compact binocularsCamera is easy to use and doesn  x92 t require two handsStores nearly 150 pictures in internal memoryCons Low picture qualityNo direct image preview or management25mm objective lens means you need a lot of light to get the most out of the binoculars
+Price : None
+
+[0mB004M4UFUA[1
+[1mAtrend A201-12CP Single-Sealed Up-Fire Enclosure for Dodge Ram Quad Cab 2002 and Up[0m
+B Box Series Single Sealed 10  Up Fire Enclosure For Dodge Ram Quad Cab 2002   Up    Crew Cabs
+Price : 72.2
+
+[0mB000BX4ZXE[1
+[1mCoby TF-DVD7333 7-Inch TFT Portable DVD Player with Swivel Screen[0m
+7  TFT Portable DVD CD MP3 Player with Swivel Screen
+Price : None
+
+[0mB00CLBZAHY[1
+[1mAMD FD6350FRHKBOX FX-6350 FX-Series 6-Core Black Edition[0m
+AMD FX 6350 Six Core Processor 3 9GHz Socket AM3   Retail
+Price : 139.97
+
+[0mB003JHJL38[1
+[1mUnique 185 Hours Back-up Battery Life Time (Standby), Reecom R-1650D S.A.M.E Weather Alert Radio with AM/FM (Light Grey), Alert Message and Effective Time Count Down Display At a Glance, 25 Event Memories[0m
+The Reecom R 1650 is a desktop weather alert radio with AM FM band radio  light gray color   all digital operations  equipped with Reecom s proprietary technology  quickly track and decode S A M E  alert signals  In case of power outage which usually happens during emergency period  the R 1650 will run on back up battery  4  AA  size  battery not included  for more than 185 Hours in standby mode operation which is the most valuable and unique feature in the current market  In the mean time  the R 1650 radio also features in 1   Easy programming  the R 1650 lets you to select down to single county and suppress other alerts  2   Receiving over 80 emergencies  including Tornado Warnings  Amber Alerts  for missing children   Severe Weather  terrorist attacks and more     3   Back light LCD display with wide angle viewable  4   Effective Time Display and accurate auto count down  from 15 mins to 6 hours expiration time issued by NOAA  for up to 25 active alerts simultaneously  5   Flashing LED lights display the severity level of the emergency  Warning  Watch or Advisory   Statement   6   25 Event Memories with Date   Time Log which you can scroll back through the received alerts and tests with date and time accordingly  7   26 County Code memories available  8   Defeat Siren Function  up to 48 individual alert messages you can enable or disable  9   Digital Volume Controls  the siren and voice volumes are independently settable  with a wide range from very low to max 90dB loudness of which 24 volume levels for each siren tone and voice  10   Automatically switch from AM FM radio to All Hazards   Weather Alert  Additional features include dual alarm clocks with snooze  dual radio timers  24 station preset memories  Intro scan function  sleep timer  selectable continuous backlight  built in electronic digital calendar displaying Date   Week Day and Clock Time  What s in the Box  Reecom R 1650 Alert Radio  AC power adapter  and User s Manual  Warranty  One Year
+Price : 53.0
+
+[0mB0007QN18K[1
+[1mSennheiser HD 485 Open Air Over-Ear Headphones (Discontinued by Manufacturer)[0m
+The Sennheiser HD 485 Headphones are open  circumaural stereo headphones with exceptional sound characteristics and outstanding comfort  The HD 485 uses the latest diaphragm geometry for detailed stereo sound  lightweight aluminum voice coils for excellent dynamics and high efficiency  and a gold plated adapter for superior connections  The HD 485 comes with a headphone holder that you can attach to a table or shelf  as well as a three meter single sided cable
+Price : 19.89
+
+[0mB0000AE68O[1
+[1mItoya ART Profolio 8 1/2 x 11 Storage/Display Book Portfolio-24 Sleeves/48 Views[0m
+Art Portfolio  Top Load  24 Sleeves  8 1 2 in x11 in   Black
+Price : 5.62
+
+[0mB002RL8IAY[1
+[1mWD My Book Studio 1 TB USB 2.0/FireWire 800/400, Desktop External Hard Drive[0m
+My Book Studio   Pure performance for Mac Designed for Mac  My Book Studio external drives feature a customizable e label  automatic  visual backup  and password protection  The high performance FireWire 800 interface gives you the speed you need for creative endeavors like photo and video editing and graphic design
+Price : 194.99
+
+[0mB0006N4X2C[1
+[1mXtremeMac SportWrap iPod Mini Armband (Black)[0m
+The SportWrap iPod Armband is the only moisture resistant  true sports armband for active iPod users  SportWrap is perfect for excersice  biking  jogging  walking and working out  SportWrap can be worn on either arm  adjusts to fit most arm sizes  and stores excess earbud cord safely out of your way  Quality Neoprene construction makes SportWrap water resistant to help keep your iPod dry when you re not  The built in playthrough cover allows you to control your iPod while it s in the case FeaturesPerfect for biking  jogging  walking and working outWater resistant design keeps your iPod dryKeeps excess earbud cord out of your wayPlay through cover gives you access to controlsQuality Neoprene maximizes comfort and fitStays secure with super strong Velcro strapHeadphone jack opening is self sealing to help keep moisture outComfortably fits 10  to 17  arm sizes
+Price : None
+
+[0mB0042LPLIE[1
+[1mHP 505B MT AX220 250/2GB[0m
+Enhance your business fundamentals  Designed to help you focus on what matters most  your business  The HP 505B Business PC gives you a cost effective blend of capable AMD technology and just right computing to suit your needs and your budget
+Price : None
+
+[0mB002AQ51VK[1
+[1mSherwood BDP-5004 Blu-ray Disc Player (Black)[0m
+The BDP 5004 is a Profile 2 0 player that outputs at 1080i  1080p 60 and 1080p 24  It can also upscale standard DVDs to 720p  1080i  or 1080p through its HDMI 1 3 output  Both Deep Color and XV Color are supported  as well as onboard decoding for Dolby TrueHD and DTS HD Master Audio high resolution audio formats   Other features  Component and composite outputs  coaxial digital output and 2 channel analog down mix output
+Price : 7.99
+
+[0mB00BYG6KUI[1
+[1mEvertech with OSD Menu; CCTV Security Dome Camera 700 TVL Sony CCD Weatherproof Varifocal Lens Day Night Vision Outdoor with OSD Control Menu[0m
+NEW Model comes with OSD Menu Button on the Cable   With robust weatherproof and vandal resist casing  this indoor outdoor camera is ideal for your surveillance applications and it works well in the areas such as rain  dust  or wet environment  This infrared color camera works on day and night and it will do automatically switch to black and white picture at night  It provide you with the clear high resolution image  Equipped with 36 infra red LEDs  this camera will make any objects visible up to 72FT  The camera easily connects to your TV  VCR or security monitor for the protection of your home  office or other valuables Features  Weatherproof and Vandal resist  Indoor and Outdoor Day and Night VisionManual Pan   Tilt for with Wall mount and Ceiling mount Clear resolution 700TV Lines video display Powerful 1 3  Sony Super Had CCD color image sensor chip set36 infra red LEDs see in the dark up to 72ft Easy to install and connects to your existing TV  VCR  DVR Quad Process Operates in freezing temperatures down to 4F  20C Technichal Details Image Sensor    1 3  Sony High Resolution 700 TVL CCD  SONY Effio DSPSignal System    NTSCEffective Pixels  768  H  x 582  V Sensing Area   4 9mm x 3 7mmResolution  700 TV linesMIN  Illumination  0 0 Lux  IR on S N Ratio  More than 48 dBAuto Electronic Shutter   1 60 to 1 100 000 secLens Types  2 8 12mm Vari focal LensInfrared LED   36 PcsInfrared Distance   72FTVideo Output   1 0Vp p 75  x3A9 Power Supply  DC 12V  500mA Min   1A Recommended
+Price : 62.97
+
+[0mB00JCSLDAW[1
+[1mChest Mount Harness for GoPro Cameras - Adjustable Body Strap Rig + 3-Way Adjustment Base - Fits ALL GoPro Models, HERO3+ Black Edition, HERO3, HERO2, HERO1 etc. - By Premium Accessories Brand Nordic Flash™ - 1 Year Warranty (Black)[0m
+GoPro Chest Mount Harness With 3 Way Adjustment Base From Nordic Flash trade All Nordic Flash trade  Accessories are Fully Adjustable to Fit ALL GoPro Cameras  GoPro HERO3  Black Edition  Silver  White  HERO3  HERO2  and HD HERO Original Cameras etc  nbsp Functionality The chest harness is elastic and adjustable  one size fits all  and will keep your camera on your chest to capture amazing videos Perfect for walking  skiing  jogging  mountain biking  climbing  motocross  water sports  kayaking  surfing etc  nbsp Inside Package   Elastic Adjustable Chest Harness  3 Way Adjustment Base nbsp We are so confident in our Nordic Flash trade  GoPro accessories that we offer you a 1 year free no hassle replacement guarantee Click the Add to Cart Button at the Top of this Page Now and Capture Awesome Videos with Your GoPro Camera
+Price : None
+
+[0mB005IA844Q[1
+[1mSeagate FreeAgent GoFlex Desk 2TB FireWire 800 USB 2.0 External Hard Drive for Mac STBC2000101[0m
+
+Price : 99.99
+
+[0mB00305N47S[1
+[1mOKGEAR SUPER FAST 6GB/S OK18A3RK12 , 18 inch SATA 3.0 round cable, RIGHT ANGLE to straight w/ metal latch,black color[0m
+18 inch SATA 3 0 round cable  RIGHT ANGLE to straight w  metal latch black color SUPER FAST 6GB S
+Price : 4.49
+
+[0mB0009Y7BEU[1
+[1mCaselogic JDS-4 USB Drive Shuttle 4-Capacity (Black)[0m
+Case Logic is obsessed with organization   No matter who you are  what toys  tools or technology you have  where you are  or where you are going  Case Logic is your partner in managing the things that matter to you  We are the  stuff wranglers  that make life easier   The JDS 4 Neoprene USB case holds  4  USB drives and features an expandable Neoprene outer sheet to helps store   protect your data  music and photos   Easy access flip pockets expand to store small to medium sized USB drives   Convenient metal push clip attaches to keys  lanyards  backpacks and business cases   25 Year Warranty
+Price : 7.3
+
+[0mB002KS5CQW[1
+[1mBurglabar 6 Pack[0m
+Burglabar is a unique self locking hinge type lock designed to offer additional security protection for Sash Windows and Sliding Patio Doors It installs in seconds and requires no tools  It is made from LEXAN which is a very strong transparent material using a special adhesive that bonds like a weld  Burglabar is the ideal affordable solution that provides you additional locking protection when you are home and for your possessions when you are away
+Price : 26.95
+
+[0mB004O8LF26[1
+[1mRam Mount 2 x 1.7 Inches Base with 1-Inch Ball that Contains the Universal AMPs Hole Pattern for the Garmin zumo/TomTom Rider/Urban Rider[0m
+The RAM B 347U base consists of a 1  diameter rubber ball connected at right angles to a 2  x 1 7  square base  The base has four pre drilled holes at each corner  making the universal 1 5 x 1 188  hole spacing  AMPS hole pattern  This adapter base is designed to hold the following devices  Garmin zumo 400  Garmin zumo 450  Garmin zumo 500  Garmin zumo 550  Garmin zumo 660  TomTom Rider 2  TomTom Urban Rider
+Price : 6.72
+
+[0mB003TWOD3G[1
+[1mSpeck Products SPK-A0010 PixelSkin HD TPU Case for iPhone 4/4S (AT&T & Verizon) - 1 Pack - Retail Packaging - Black[0m
+None
+Price : None
+
+[0mB00AQUO5RI[1
+[1mJabra SPEAK 510 Wireless Bluetooth Speaker for Softphone and Mobile Phone[0m
+
+Price : 115.0
+
+# total recommended items: 50.
