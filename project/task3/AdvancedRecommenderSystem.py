@@ -23,6 +23,7 @@ DEFAULT_LAMBDA = 0
 # Default Amount of ALS steps.
 DEFAULT_ITERATIONS = 20
 
+
 class AdvancedRecommenderSystem:
     """An advanced item-to-item Collaborative Filtering Recommender System
     Using matrix factorization
@@ -37,7 +38,8 @@ class AdvancedRecommenderSystem:
         self.itemsProperty = {}  # The item property lists.
         self.ur_matrix = None  # The user-rating matrix.
         self.user_indices_in_matrix = {}  # Row indices in the matrix per user.
-        self.item_indices_in_matrix = {}  # Column indices in the matrix per term.
+        # Column indices in the matrix per term.
+        self.item_indices_in_matrix = {}
         self.usersCount = 0  # Number of user in the user item matrix.
         self.itemsCount = 0  # Number of items in the user item matrix.
         self.userVectors = None  # User Vectors.
@@ -48,7 +50,7 @@ class AdvancedRecommenderSystem:
     def loadRatings(self, ratingsFile):
         """This method allows to feed the RS with input ratings
             The result will be a user x items matrix where missing values are initialized with zeros.
-        
+
         >>> engine = AdvancedRecommenderSystem() # doctest: +ELLIPSIS, +NORMALIZE_WHITESPACE
         >>> engine.loadRatings("example.csv")
         >>> print(numpy.round(engine.ur_matrix.todense().tolist(), 3))
@@ -68,7 +70,7 @@ class AdvancedRecommenderSystem:
                 # add item to the distinct set of items.
                 if itemId not in self.items:
                     self.items.add(itemId)
-                #add corresponding matrix index to a dict
+                # add corresponding matrix index to a dict
                 if itemId not in self.item_indices_in_matrix:
                     self.item_indices_in_matrix[itemId] = itemCount
                     itemCount += 1
@@ -87,7 +89,8 @@ class AdvancedRecommenderSystem:
             self.user_indices_in_matrix[user] = i
             for item, rating in self.ratingsIndex[user]:
                 rows.append(i)
-                cols.append(self.item_indices_in_matrix[item])  # get column index of item.
+                # get column index of item.
+                cols.append(self.item_indices_in_matrix[item])
                 vals.append(rating)
         # Create the sparse user-rating matrix, use float values due to ratings.
         self.ur_matrix = csr_matrix((vals, (rows, cols)), dtype=float)
@@ -121,8 +124,8 @@ class AdvancedRecommenderSystem:
                 if item.asin not in self.itemsProperty:
                     # assign the asin as the key and the object item as value.
                     self.itemsProperty[item.asin] = item
-    
-    def iterAls (self, k):
+
+    def iterAls(self, k):
         """This method performs the alternating least squares algorithm over k iterations
 
             This method cannot be tested using a unit test because the numbers generated are random
@@ -136,13 +139,15 @@ class AdvancedRecommenderSystem:
         # Iterate over the number of Iterations
         while k > 0:
             # Perform ALS step on user Vectors
-            self.userVectors = self.als(self.userVectors,self.itemVectors,DEFAULT_LAMBDA,"user")
+            self.userVectors = self.als(
+                self.userVectors, self.itemVectors, DEFAULT_LAMBDA, "user")
             # Perform ALS step on item Vectors
-            self.itemVectors = self.als(self.userVectors,self.itemVectors,DEFAULT_LAMBDA,"item")
+            self.itemVectors = self.als(
+                self.userVectors, self.itemVectors, DEFAULT_LAMBDA, "item")
             # Decrement count
             k -= 1
 
-    def als (self, X, Y, lambda_,type_):
+    def als(self, X, Y, lambda_, type_):
         """This method computes on step of the als algorithm. The purpose is to compute the latent vectors by user.
         This function performs one step based on users and returns the user vectors
 
@@ -166,7 +171,8 @@ class AdvancedRecommenderSystem:
             lambdaIden = numpy.eye(YTY.shape[0]) * lambda_
             # Solve x(i)= (YTY+λI)−1 * YT * r(i) for all i in userVectors.
             for user in range(X.shape[0]):
-                X [user, :] = numpy.linalg.solve((YTY + lambdaIden), self.ur_matrix.getrow(user).dot(Y))
+                X[user, :] = numpy.linalg.solve(
+                    (YTY + lambdaIden), self.ur_matrix.getrow(user).dot(Y))
             return X
         elif type_ == "item":
             # Compute X transpose * X.
@@ -175,13 +181,14 @@ class AdvancedRecommenderSystem:
             lambdaIden = numpy.eye(XTX.shape[0]) * lambda_
             # Solve y(i)= (XTX+λI)−1 * XT * r(i) for all i in userVectors.
             for item in range(Y.shape[0]):
-                Y [item, :] = numpy.linalg.solve((XTX + lambdaIden), self.ur_matrix.getcol(item).T.dot(X))
+                Y[item, :] = numpy.linalg.solve(
+                    (XTX + lambdaIden), self.ur_matrix.getcol(item).T.dot(X))
             return Y
 
     def predictRating(self, userId, itemId):
         """This method returns for a given user (the active user) and item a
         predicted rating.
-        
+
             Unit tests could not be used because of the random values assigned to userVectors and itemVectors
         """
         # Iterate over n steps of ALS Algorithm.

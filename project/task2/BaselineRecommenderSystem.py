@@ -182,7 +182,8 @@ class BaselineRecommenderSystem:
         # Predict ratings for unrated items
         result = []
         for item in unratedItems:
-            rating = self.predictRating(userId, item, similarity_threshold, subset_fuzziness)
+            rating = self.predictRating(
+                userId, item, similarity_threshold, subset_fuzziness)
             result.append((item, rating))
         # Sort list based on ratings (descending order)
         try:
